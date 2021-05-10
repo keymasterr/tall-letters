@@ -1,0 +1,194 @@
+:root {
+    --gap: 8px;
+    --rs: 10vh;
+    --cell-bg: #28292b;  /* # #151412 */
+    --bg: #eed974;
+    --article-bg: #f4f4f4;
+    --text: #28292b;
+    --link: blue;
+    --link-h: #ef303b
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    margin: 0;
+    padding: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-size: 20px;
+    font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
+    line-height: 1.3;
+}
+p {
+    margin: 0;
+    margin-bottom: 0.7em;
+    max-width: 40em;
+}
+
+a {
+    color: var(--link);
+    text-decoration: none;
+    transition: color 0.2s;
+}
+a:hover {
+    color: var(--link-h);
+    transition: color 0s;
+}
+
+main {
+    position: relative;
+    height: 90vh;
+}
+
+article {
+    margin: 0 var(--gap);
+    padding: var(--gap);
+    background: var(--article-bg);
+    min-height: 100vh;
+}
+
+.text-input {
+    font-size: 20px;
+    display: block;
+    margin: 0 auto var(--gap);
+    padding: calc(var(--gap) / 2);
+    outline: none;
+    border: 1px solid #e5e4e2;
+    /* position: absolute !important;
+    top: -9999px !important;
+    left: -9999px !important; */
+}
+
+.display-wrapper {
+    display: flex;
+    position: absolute;
+    width: 100%;
+    bottom: 0;
+    --scroll-mod: 0px;
+    height: calc(100% - var(--scroll-mod));
+}
+
+.display {
+    position: relative;
+    display: flex;
+    flex-grow: 1;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    margin: calc(var(--gap) / 2);
+    cursor: text;
+}
+
+.sym {
+    display: flex;
+}
+
+.col {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+}
+
+.cell {
+    position: relative;
+    /* flex-grow: 1; */
+    flex-basis: 0;
+    margin: calc(var(--gap) / 2);
+    border-radius: 1px;
+}
+.sol { background: var(--cell-bg); }
+.sol::before, .sol::after { border-color: var(--cell-bg) !important; }
+
+.s1 { flex-basis: calc(((100% - (5 * var(--gap))) / 6 * 1) + (0 * var(--gap))); }
+.s2 { flex-basis: calc(((100% - (5 * var(--gap))) / 6 * 2) + (1 * var(--gap))); }
+.s3 { flex-basis: calc(((100% - (5 * var(--gap))) / 6 * 3) + (2 * var(--gap))); }
+.s4 { flex-basis: calc(((100% - (5 * var(--gap))) / 6 * 4) + (3 * var(--gap))); }
+.s5 { flex-basis: calc(((100% - (5 * var(--gap))) / 6 * 5) + (4 * var(--gap))); }
+.s6 { flex-basis: calc(((100% - (5 * var(--gap))) / 6 * 6) + (5 * var(--gap))); }
+
+.rs-tr { border-top-right-radius: var(--rs); }
+.rs-br { border-bottom-right-radius: var(--rs); }
+.rs-bl { border-bottom-left-radius: var(--rs); }
+.rs-tl { border-top-left-radius: var(--rs); }
+
+.d-tl::before,
+.d-bl::before,
+.d-tr::after,
+.d-br::after
+{
+    content: '';
+    position: absolute;
+    display: block;
+    width: var(--gap);
+    height: 100%;
+    top: 0;
+    box-sizing: border-box;
+    border-style: solid;
+    border-width: 0;
+    border-color: transparent;
+}
+.d-tl::before,
+.d-tr::after
+{ border-top-width: var(--gap); }
+.d-bl::before,
+.d-br::after
+{ border-bottom-width: var(--gap); }
+.d-tl::before,
+.d-bl::before
+{ left: calc(-1 * var(--gap)); }
+.d-tr::after,
+.d-br::after
+{ right: calc(-1 * var(--gap)); }
+
+.cursor {
+    position: absolute;
+    display: none;
+    width: var(--gap);
+    height: 100%;
+    background: #ef303b;
+    animation: blink 1.2s infinite;
+    transform: translateX(-50%);
+}
+.cursor.range {
+    animation: none;
+    transform: none;
+}
+.focus .cursor { display: block; }
+@keyframes blink {
+    0%   { opacity: .2; }
+    50%  { opacity:  1; }
+    100% { opacity: .2; }
+}
+
+footer {
+    margin: var(--gap);
+    display: flex;
+}
+.footer-left {
+    flex-grow: 1;
+    margin-right: var(--gap);
+}
+.footer-right {
+    flex-grow: 2;
+    margin-left: var(--gap);
+    text-align: right;
+}
+
+.mailsnail-20 {
+    display: inline-block;
+    position: relative;
+    -webkit-mask-image: url("/img/mailsnail.png");
+    mask-image: url("/img/mailsnail.png");
+    -webkit-mask-size: 100% auto;
+    mask-size: 100% auto;
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+    width: 1.81em;
+    margin: 0 0.05em 0 -0.35em;
+    background: currentcolor;
+  }
