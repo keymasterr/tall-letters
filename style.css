@@ -24,11 +24,11 @@ body {
     font-size: 20px;
     font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
     line-height: 1.3;
+    margin: 0 var(--gap) var(--gap);
 }
 p {
     margin: 0;
     margin-bottom: 0.7em;
-    max-width: 40em;
 }
 
 a {
@@ -47,8 +47,9 @@ main {
 }
 
 article {
-    margin: 0 var(--gap);
-    padding: var(--gap);
+    max-width: 600px;
+    margin: 0 auto;
+    padding: var(--gap) calc(3 * var(--gap)) calc(3 * var(--gap));
     background: var(--article-bg);
     min-height: 100vh;
 }
@@ -149,8 +150,9 @@ article {
     position: absolute;
     display: none;
     width: var(--gap);
-    height: 100%;
-    background: #ef303b;
+    top: calc(-.5 * var(--gap));
+    bottom: calc(-.5 * var(--gap));
+    background: var(--link-h);
     animation: blink 1.2s infinite;
     transform: translateX(-50%);
 }
@@ -177,6 +179,9 @@ footer {
     flex-grow: 2;
     margin-left: var(--gap);
     text-align: right;
+}
+.footer-mailto {
+    border-bottom: 1px solid #0001;
 }
 
 .mailsnail-20 {

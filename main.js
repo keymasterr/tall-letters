@@ -1,6 +1,9 @@
 let inp = document.querySelector('.text-input');
 let disp = document.querySelector('.display');
+let preferUser = false;
+let abc_u = abc;
 
+inp.value = 'tall letters';
 inp.addEventListener('input', function() {
     render(this.value);
 });
@@ -18,8 +21,20 @@ render = function(text) {
         symEl.classList.add('sym');
         symEl.dataset.sym = sym;
         let symColsNum = 0;
-        const symModelsArr = abc.filter(el => el.sym === sym);
+        let symModelsArr = abc_u.filter(el => el.sym === sym);
+        if (preferUser) {
+            let userSymsArr = symModelsArr.filter(el => el.author === 'user');
+            if (userSymsArr.length > 0) {
+                symModelsArr = userSymsArr;
+            }
+        }
         const symModelsNum = symModelsArr.length;
+            if (preferUser) {
+                let userSymsArr = symModelsArr.filter(el => el.author === 'user');
+                if (userSymsArr.length > 0) {
+                    symModelsArr = userSymsArr;
+                }
+            }
         if (symModelsNum > 0) {
             const rnd = Math.floor(Math.random() * symModelsNum);
             const model = symModelsArr[rnd].model;

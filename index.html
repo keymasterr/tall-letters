@@ -10,7 +10,7 @@
     <script src="abc.js" defer></script>
     <script src="main.js" defer></script>
     <link rel="stylesheet" href="demo.css">
-    <script src="demo.js" defer></script>
+    <script src="demo.js"></script>
 </head>
 <body>
     <main>
@@ -20,12 +20,48 @@
         </div>
     </main>
     <article>
-        <input class="text-input" type="text" value="tall letters" title="Was going to hide this box, but meh. It's ok to have one">
+        <form onsubmit="inp.blur(); event.preventDefault();">
+            <input class="text-input" type="text" value="tall letters" title="Was going to hide this box, but meh. It's ok to have one">
+        </form>
 
-        <div>
+        <div class="demo-container">
             <div class="demo">
+                <div class="add-col-btn">+</div>
                 <div class="demo-col">
-                    <div class="demo-cell">
+                    <div class="demo-cell active linkable first-chain-cell">
+                        <div class="demo-d_tl"></div>
+                        <div class="demo-d_tr"></div>
+                        <div class="demo-d_bl"></div>
+                        <div class="demo-d_br"></div>
+                        <div class="demo-rs_tl inactive"></div>
+                        <div class="demo-rs_tr"></div>
+                        <div class="demo-rs_bl"></div>
+                        <div class="demo-rs_br"></div>
+                        <div class="demo-link linked"></div>
+                    </div>
+                    <div class="demo-cell active linkable chain-cell">
+                        <div class="demo-d_tl"></div>
+                        <div class="demo-d_tr"></div>
+                        <div class="demo-d_bl"></div>
+                        <div class="demo-d_br"></div>
+                        <div class="demo-rs_tl"></div>
+                        <div class="demo-rs_tr"></div>
+                        <div class="demo-rs_bl"></div>
+                        <div class="demo-rs_br"></div>
+                        <div class="demo-link linked"></div>
+                    </div>
+                    <div class="demo-cell active last-chain-cell">
+                        <div class="demo-d_tl"></div>
+                        <div class="demo-d_tr"></div>
+                        <div class="demo-d_bl"></div>
+                        <div class="demo-d_br"></div>
+                        <div class="demo-rs_tl"></div>
+                        <div class="demo-rs_tr"></div>
+                        <div class="demo-rs_bl inactive"></div>
+                        <div class="demo-rs_br"></div>
+                        <div class="demo-link"></div>
+                    </div>
+                    <div class="demo-cell first-chain-cell">
                         <div class="demo-d_tl"></div>
                         <div class="demo-d_tr"></div>
                         <div class="demo-d_bl"></div>
@@ -36,7 +72,118 @@
                         <div class="demo-rs_br"></div>
                         <div class="demo-link"></div>
                     </div>
+                    <div class="demo-cell active linkable first-chain-cell">
+                        <div class="demo-d_tl"></div>
+                        <div class="demo-d_tr"></div>
+                        <div class="demo-d_bl"></div>
+                        <div class="demo-d_br"></div>
+                        <div class="demo-rs_tl"></div>
+                        <div class="demo-rs_tr"></div>
+                        <div class="demo-rs_bl"></div>
+                        <div class="demo-rs_br"></div>
+                        <div class="demo-link linked"></div>
+                    </div>
+                    <div class="demo-cell active last-chain-cell">
+                        <div class="demo-d_tl"></div>
+                        <div class="demo-d_tr"></div>
+                        <div class="demo-d_bl"></div>
+                        <div class="demo-d_br active"></div>
+                        <div class="demo-rs_tl"></div>
+                        <div class="demo-rs_tr"></div>
+                        <div class="demo-rs_bl inactive"></div>
+                        <div class="demo-rs_br"></div>
+                        <div class="demo-link"></div>
+                    </div>
+                    <div class="remove-col-btn">×</div>
                 </div>
+                <div class="demo-col">
+                    <div class="demo-cell active linkable first-chain-cell">
+                        <div class="demo-d_tl active"></div>
+                        <div class="demo-d_tr"></div>
+                        <div class="demo-d_bl"></div>
+                        <div class="demo-d_br"></div>
+                        <div class="demo-rs_tl"></div>
+                        <div class="demo-rs_tr inactive"></div>
+                        <div class="demo-rs_bl"></div>
+                        <div class="demo-rs_br"></div>
+                        <div class="demo-link linked"></div>
+                    </div>
+                    <div class="demo-cell active linkable last-chain-cell">
+                        <div class="demo-d_tl"></div>
+                        <div class="demo-d_tr"></div>
+                        <div class="demo-d_bl"></div>
+                        <div class="demo-d_br"></div>
+                        <div class="demo-rs_tl"></div>
+                        <div class="demo-rs_tr"></div>
+                        <div class="demo-rs_bl"></div>
+                        <div class="demo-rs_br"></div>
+                        <div class="demo-link"></div>
+                    </div>
+                    <div class="demo-cell active linkable first-chain-cell">
+                        <div class="demo-d_tl active"></div>
+                        <div class="demo-d_tr"></div>
+                        <div class="demo-d_bl"></div>
+                        <div class="demo-d_br"></div>
+                        <div class="demo-rs_tl"></div>
+                        <div class="demo-rs_tr inactive"></div>
+                        <div class="demo-rs_bl"></div>
+                        <div class="demo-rs_br"></div>
+                        <div class="demo-link linked"></div>
+                    </div>
+                    <div class="demo-cell active linkable chain-cell">
+                        <div class="demo-d_tl"></div>
+                        <div class="demo-d_tr"></div>
+                        <div class="demo-d_bl"></div>
+                        <div class="demo-d_br"></div>
+                        <div class="demo-rs_tl"></div>
+                        <div class="demo-rs_tr"></div>
+                        <div class="demo-rs_bl"></div>
+                        <div class="demo-rs_br"></div>
+                        <div class="demo-link linked"></div>
+                    </div>
+                    <div class="demo-cell active linkable chain-cell">
+                        <div class="demo-d_tl"></div>
+                        <div class="demo-d_tr"></div>
+                        <div class="demo-d_bl"></div>
+                        <div class="demo-d_br"></div>
+                        <div class="demo-rs_tl"></div>
+                        <div class="demo-rs_tr"></div>
+                        <div class="demo-rs_bl"></div>
+                        <div class="demo-rs_br"></div>
+                        <div class="demo-link linked"></div>
+                    </div>
+                    <div class="demo-cell active last-chain-cell">
+                        <div class="demo-d_tl"></div>
+                        <div class="demo-d_tr"></div>
+                        <div class="demo-d_bl"></div>
+                        <div class="demo-d_br"></div>
+                        <div class="demo-rs_tl"></div>
+                        <div class="demo-rs_tr"></div>
+                        <div class="demo-rs_bl"></div>
+                        <div class="demo-rs_br inactive"></div>
+                        <div class="demo-link"></div>
+                    </div>
+                    <div class="remove-col-btn">×</div>
+                </div>
+            </div>
+
+            <div class="demo-text">
+                <p>
+                    Long story short, this is how <em>‘s’</em> letter builds:
+                    <br>
+                    <code>{sym: 's', model: ['<span class="hl-g">(></span><span class="hl-r">3</span><span class="hl-b">(</span>,<span class="hl-r">01</span>,<span class="hl-r">2</span><span class="hl-b">(</span>','<span class="hl-g">)</span><span class="hl-r">2</span>,<span class="hl-g"><span class="hl-b">&lt;)</span></span><span class="hl-r">4</span>&lt;)']}</code>
+                </p>
+                <p>Where [model] is an array of two 'column','column' of 6 cells by height each. <span class="hl-r">Digits</span> mean consequent united cells and <span class="hl-r">digit with zero</span> means gap of a certain size. Symbols ‘&lt;>’ are for left and right side dashes and parenthesis ‘()’ mean left and right corner roundings. Their position <span class="hl-g">before</span> a <span class="hl-r">digit</span> or <span class="hl-b">after</span> one determines either <span class="hl-g">top</span> or <span class="hl-b">bottom</span> side will be affected. Different cell groups inside of 'column' are separated by com,mas.</p>
+            </div>
+            <div class="demo-add_sym">
+                Here, try to create one yourself: <small>(no validation yet)</small>
+                <form onsubmit="addUserSym()">
+                    sym: '<input type="text" class="demo-add_sym-sym" required>'
+                    model: [<input type="text" class="demo-add_sym-model" required>]
+                    <input type="submit" class="demo-add_sym-submit" value="Add"> <span class="demo-add_sym-error"></span>
+                </form>
+                <ul class="demo-user_syms"></ul>
+                <small>I will be happy to add new symbols to the actual list if you'll come up with some nice results. Drop me a letter.</small>
             </div>
         </div>
     </article>
@@ -47,9 +194,9 @@
         </div>
         <div class="footer-right">
             <p>
-                <span title="©" style="cursor: help;">@</span> <span title="2021.05.10">2021</span>
+                <a href="mailto:kmstrr@gmail.com" class="footer-mailto">kmstrr<span class="mailsnail-20">@</span>gmail.com</a>
                 <br>
-                <a href="mailto:kmstrr@gmail.com">kmstrr<span class="mailsnail-20">@</span>gmail.com</a>
+                © <span title="2021.05.10">2021</span>
             </p>
         </div>
     </footer>
