@@ -47,11 +47,13 @@ main {
 }
 
 article {
-    max-width: 600px;
+    width: 100%;
+    max-width: calc(840px - (2 * var(--gap)));
     margin: 0 auto;
-    padding: var(--gap) calc(3 * var(--gap)) calc(3 * var(--gap));
+    padding: var(--gap) calc(3 * var(--gap)) calc(10 * var(--gap));
     background: var(--article-bg);
     min-height: 100vh;
+    border-radius: 2px;
 }
 
 .text-input {
@@ -81,7 +83,7 @@ article {
     flex-grow: 1;
     flex-direction: row;
     flex-wrap: nowrap;
-    margin: calc(var(--gap) / 2);
+    margin: calc(var(--gap) / 2) calc(var(--gap) * -.5);
     cursor: text;
 }
 
@@ -168,8 +170,10 @@ article {
 }
 
 footer {
-    margin: var(--gap);
     display: flex;
+    width: 100%;
+    max-width: calc(840px - (2 * var(--gap)));
+    margin: var(--gap) auto;
 }
 .footer-left {
     flex-grow: 1;

@@ -1,3 +1,7 @@
+.demo-container {
+    max-width: 600px;
+    margin: 0 auto;
+}
 
 .demo {
     position: relative;
@@ -13,6 +17,7 @@
     margin: 3em auto 1em;
     border-radius: var(--rs);
     line-height: 1;
+    user-select: none;
 }
 
 .demo-text {
@@ -30,8 +35,12 @@
 }
 .demo-add_sym-sym {
     width: 1.5em;
+    text-align: center;
 }
 .demo-add_sym-submit {}
+demo-add_sym-error {
+    color: rgb(197, 64, 64);
+}
 
 .demo-user_syms {
     padding: 0;
@@ -95,6 +104,18 @@
     background: var(--demo-bg);
     border: 1px dashed var(--gray);
     cursor: pointer;
+}
+.demo-cell.active::before {
+    content: '';
+    display: block;
+    text-align: center;
+    border: 1px dashed var(--gray);
+    position: absolute;
+    width: 40%;
+    height: 30%;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
 }
 .demo-cell.active {
     --demo-bg: var(--cell-bg);

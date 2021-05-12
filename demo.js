@@ -41,7 +41,7 @@ addUserSym = function() {
         return
     }
 
-    errorEl.textContent = '';
+    errorEl.innerHTML = '';
     inpSym.value = '';
     inpMod.value = '';
 }
@@ -195,6 +195,10 @@ initDemo = function(col) {
     demo.querySelectorAll('.remove-col-btn').forEach(btn => {
         btn.addEventListener('click', removeCol.bind(this), true);
     });
+
+    demo.querySelectorAll('div').forEach(el => {
+        el.addEventListener('click', parseDemo);
+    });
 }
 
 createDemo = function() {
@@ -206,6 +210,9 @@ createDemo = function() {
     demo.appendChild(addColEl);
 
     demo.querySelectorAll('.demo-col').forEach(col => {initDemo(col)});
+    demo.querySelectorAll('div').forEach(el => {
+        el.addEventListener('click', parseDemo);
+    });
 }
 createCol = function() {
     const demo = document.querySelector('.demo');
@@ -237,4 +244,58 @@ createCell = function() {
         cell.appendChild(elDiv);
     });
     return cell;
+}
+
+parseDemo = function() {
+    let model = [];
+    let modelStr = '';
+    const demo = document.querySelector('.demo');
+    const cols = demo.querySelectorAll('.demo-col');
+    const output = document.querySelector('.demo-model-output');
+
+    cols.forEach(col => {
+        let lngth = 0;
+        let colStr = '';
+        col.querySelectorAll('.demo-cell').forEach(cell => {
+            lngth++;
+            let nextCell = cell.nextElementSibling?.classList.contains('demo-cell')
+                ? cell.nextElementSibling
+                : false;
+            if (cell.classList.contains('active')) {
+                if (
+                    !(cell.classList.contains('chain-cell'))
+                &&  !(cell.classList.contains('last-chain-cell'))
+                ) {
+                    cell.querySelector('.demo-d_tl.active') && (colStr += '<');
+                    cell.querySelector('.demo-d_tr.active') && (colStr += '>');
+                    cell.querySelector('.demo-rs_tl.inactive') && (colStr += '(');
+                    cell.querySelector('.demo-rs_tr.inactive') && (colStr += ')');
+                }
+                if (
+                    !(cell.classList.contains('first-chain-cell'))
+                &&  !(cell.classList.contains('chain-cell'))
+                ) {
+                    colStr += lngth.toString();
+                    lngth = 0;
+                    cell.querySelector('.demo-d_bl.active') && (colStr += '<');
+                    cell.querySelector('.demo-d_br.active') && (colStr += '>');
+                    cell.querySelector('.demo-rs_bl.inactive') && (colStr += '(');
+                    cell.querySelector('.demo-rs_br.inactive') && (colStr += ')');
+                    colStr += ',';
+                }
+            } else if (nextCell && !(nextCell.classList.contains('active'))) {
+                return
+            } else {
+                colStr += '0' + lngth.toString() + ',';
+                lngth = 0;
+            }
+        });
+        model.push(colStr.slice(0, -1));
+    });
+    console.debug(model);
+    modelStr = '\''+ model.join('\',\'') +'\'';
+
+    output.textContent = modelStr;
+    document.querySelector('.demo-sym-output').textContent = '?';
+    document.querySelector('.demo-description').style.display = 'none';
 }

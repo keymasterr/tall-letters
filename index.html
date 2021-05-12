@@ -169,18 +169,19 @@
 
             <div class="demo-text">
                 <p>
-                    Long story short, this is how <em>‘s’</em> letter builds:
+                    Long story short, this is how glyph above is built:
                     <br>
-                    <code>{sym: 's', model: ['<span class="hl-g">(></span><span class="hl-r">3</span><span class="hl-b">(</span>,<span class="hl-r">01</span>,<span class="hl-r">2</span><span class="hl-b">(</span>','<span class="hl-g">)</span><span class="hl-r">2</span>,<span class="hl-g"><span class="hl-b">&lt;)</span></span><span class="hl-r">4</span>&lt;)']}</code>
+                    <code>{sym: '<span class="demo-sym-output">s</span>', model: [<span class="demo-model-output">'<span class="hl-g">(></span><span class="hl-r">3</span><span class="hl-b">(</span>,<span class="hl-r">01</span>,<span class="hl-r">2</span><span class="hl-b">(</span>','<span class="hl-g">)</span><span class="hl-r">2</span>,<span class="hl-g"><span class="hl-g">&lt;)</span></span><span class="hl-r">4</span><span class="hl-b">&lt;)</span>'</span>]}</code>
                 </p>
-                <p>Where [model] is an array of two 'column','column' of 6 cells by height each. <span class="hl-r">Digits</span> mean consequent united cells and <span class="hl-r">digit with zero</span> means gap of a certain size. Symbols ‘&lt;>’ are for left and right side dashes and parenthesis ‘()’ mean left and right corner roundings. Their position <span class="hl-g">before</span> a <span class="hl-r">digit</span> or <span class="hl-b">after</span> one determines either <span class="hl-g">top</span> or <span class="hl-b">bottom</span> side will be affected. Different cell groups inside of 'column' are separated by com,mas.</p>
+                <p class="demo-description">Where [model] is an array of two 'column','column' each 6 cells high. <span class="hl-r">Digits</span> mean consequent united cells and <span class="hl-r">digit with zero</span> means gap of a certain size. Symbols ‘&lt;>’ are for left and right side dashes and parenthesis ‘()’ mean left and right corner roundings. Their position <span class="hl-g">before</span> a <span class="hl-r">digit</span> or <span class="hl-b">after</span> one determines whether <span class="hl-g">top</span> or <span class="hl-b">bottom</span> side will be affected. Different cell groups inside of 'column' are separated by com,mas.</p>
             </div>
             <div class="demo-add_sym">
                 Here, try to create one yourself: <small>(no validation yet)</small>
                 <form onsubmit="addUserSym()">
-                    sym: '<input type="text" class="demo-add_sym-sym" required>'
+                    sym: '<input type="text" class="demo-add_sym-sym" maxlength="1" required>'
                     model: [<input type="text" class="demo-add_sym-model" required>]
-                    <input type="submit" class="demo-add_sym-submit" value="Add"> <span class="demo-add_sym-error"></span>
+                    <input type="submit" class="demo-add_sym-submit" value="Add">
+                    <div class="demo-add_sym-error"></div>
                 </form>
                 <ul class="demo-user_syms"></ul>
                 <small>I will be happy to add new symbols to the actual list if you'll come up with some nice results. Drop me a letter.</small>
