@@ -6,7 +6,8 @@
     --article-bg: #f4f4f4;
     --text: #28292b;
     --link: blue;
-    --link-h: #ef303b
+    --link-h: #ef303b;
+    --gray: hsl(51, 3%, 55%);
 }
 
 * {
@@ -89,6 +90,7 @@ article {
     flex-wrap: nowrap;
     margin: calc(var(--gap) / 2) calc(var(--gap) * -.5);
     cursor: text;
+    will-change: height;
 }
 .display.highlight-user .sym:not([data-author="user"]) {
     opacity: 0.75;

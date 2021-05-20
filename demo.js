@@ -1,5 +1,6 @@
 let userAbcLoaded;
 let userAbc = [];
+let modelStr = '';
 document.addEventListener('DOMContentLoaded', function(event) {
     createDemo();
     parseUserAbc();
@@ -75,6 +76,7 @@ useUserSym = function(obj) {
     li.appendChild(remEl);
     list.appendChild(li);
     saveUserAbc();
+    abc_u = abc.concat(userAbc);
 }
 saveUserAbc = function() {
     localStorage.setItem('user-abc', JSON.stringify(userAbc));
@@ -95,13 +97,13 @@ initDemo = function(col) {
             const prevCell = this.previousElementSibling;
             const nextCell = this.nextElementSibling;
             if (this.classList.contains('active')) {
-                this.classList.remove('active', 'linkable');
-                prevCell.classList.remove('linkable');
+                this.classList.remove('active', 'linkable', 'first-chain-cell', 'chain-cell', 'last-chain-cell');
                 const childrenArr = Array.from(this.children);
                 childrenArr.forEach(div => {
                     div.classList.remove('active','inactive','linked')
                 })
                 if (prevCell) {
+                    prevCell.classList.remove('linkable');
                     if (prevCell.classList.contains('chain-cell')) {
                         prevCell.classList.remove('chain-cell');
                         prevCell.classList.add('last-chain-cell');
@@ -248,10 +250,10 @@ createCell = function() {
 
 parseDemo = function() {
     let model = [];
-    let modelStr = '';
+    modelStr = '';
     const demo = document.querySelector('.demo');
     const cols = demo.querySelectorAll('.demo-col');
-    const output = document.querySelector('.demo-model-output');
+    const output = document.querySelector('.demo-add_sym-model');
 
     cols.forEach(col => {
         let lngth = 0;
@@ -292,10 +294,11 @@ parseDemo = function() {
         });
         model.push(colStr.slice(0, -1));
     });
-    console.debug(model);
     modelStr = '\''+ model.join('\',\'') +'\'';
 
-    output.textContent = modelStr;
-    document.querySelector('.demo-sym-output').textContent = '?';
-    document.querySelector('.demo-description').style.display = 'none';
+    output.value = modelStr;
+}
+importFromDesigner = function() {
+    const output = document.querySelector('.demo-add_sym-model');
+    output.value = modelStr;
 }
