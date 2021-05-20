@@ -21,7 +21,9 @@
     </main>
     <article>
         <form onsubmit="inp.blur(); event.preventDefault();">
+        <form onsubmit="inp.blur(); event.preventDefault();" class="main-input">
             <input class="text-input" type="text" value="tall letters" title="Was going to hide this box, but meh. It's ok to have one">
+            <input type="checkbox" name="highlight-user" id="highlight-user" onclick="highlightUserToggle()"> <label for="highlight-user">Highlight user's glyphs</label>
         </form>
 
         <div class="demo-container">

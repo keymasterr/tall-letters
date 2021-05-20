@@ -1,6 +1,7 @@
 let inp = document.querySelector('.text-input');
 let disp = document.querySelector('.display');
 let preferUser = false;
+let highlightUser = false;
 let abc_u = abc;
 
 inp.value = 'tall letters';
@@ -29,15 +30,12 @@ render = function(text) {
             }
         }
         const symModelsNum = symModelsArr.length;
-            if (preferUser) {
-                let userSymsArr = symModelsArr.filter(el => el.author === 'user');
-                if (userSymsArr.length > 0) {
-                    symModelsArr = userSymsArr;
-                }
-            }
         if (symModelsNum > 0) {
             const rnd = Math.floor(Math.random() * symModelsNum);
             const model = symModelsArr[rnd].model;
+            if (symModelsArr[rnd].hasOwnProperty('author')) {
+                symEl.dataset.author = symModelsArr[rnd].author;
+            }
 
             model.forEach(col => {
                 let colEl = document.createElement('div');
@@ -204,3 +202,8 @@ disp.addEventListener('click', () => {
 
 render(inp.value);
 windowSizes();
+
+highlightUserToggle = function() {
+    highlightUser = !highlightUser;
+    disp.classList.toggle('highlight-user');
+}

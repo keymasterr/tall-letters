@@ -56,6 +56,10 @@ article {
     border-radius: 2px;
 }
 
+.main-input {
+    text-align: center;
+}
+
 .text-input {
     font-size: 20px;
     display: block;
@@ -85,6 +89,9 @@ article {
     flex-wrap: nowrap;
     margin: calc(var(--gap) / 2) calc(var(--gap) * -.5);
     cursor: text;
+}
+.display.highlight-user .sym:not([data-author="user"]) {
+    opacity: 0.75;
 }
 
 .sym {
