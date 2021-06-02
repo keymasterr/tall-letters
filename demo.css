@@ -52,10 +52,18 @@ demo-add_sym-error {
     padding-left: 1em;
     list-style-type: none;
     font-family: monospace;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(4em, 1fr));
 }
 .demo-user_syms li {
     position: relative;
     line-height: 1.5;
+}
+.demo-user_syms .sym {
+    --gap: 4px;
+    --rs: .5em;
+    height: 3em;
+    cursor: pointer;
 }
 .demo-user_sym-remove {
     position: absolute;
@@ -70,6 +78,16 @@ demo-add_sym-error {
 }
 .demo-user_sym-remove:hover { color: var(--link-h);}
 
+.demo-user_sym-sym {
+    position: absolute;
+    width: .6em;
+    text-align: right;
+    color: var(--gray);
+    left: -1em;
+    bottom: 0;
+    user-select: none;
+    -webkit-user-select: none;
+}
 
 .add-col-btn
 , .remove-col-btn

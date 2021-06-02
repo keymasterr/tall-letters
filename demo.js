@@ -34,6 +34,9 @@ addUserSym = function() {
     obj.author = 'user';
 
     try {
+        if (!modelRegex.test((`[${inpMod.value}]`))) {
+            return
+        }
         obj.model = eval('[' + inpMod.value + ']');
         useUserSym(obj);
     }
@@ -49,7 +52,6 @@ addUserSym = function() {
 removeUserSym = function(click) {
     const li = click.target.parentElement;
     const ndx = Array.from(li.parentNode.children).indexOf(li);
-    console.log('ndx', ndx);
     userAbc.splice(ndx, 1);
     saveUserAbc();
     abc_u = abc.concat(userAbc);
@@ -68,12 +70,22 @@ useUserSym = function(obj) {
 
     const list = document.querySelector('.demo-user_syms');
     const li = document.createElement('li');
-    li.textContent = text;
+    const renderedSymEl = renderSym(obj);
+    renderedSymEl.addEventListener('click', parseModelToDemo.bind(this, '['+ modelStr +']'));
+    li.appendChild(renderedSymEl);
+    li.title = text;
+
     const remEl = document.createElement('div');
-    remEl.classList.add('demo-user_sym-remove');
-    remEl.textContent = '×';
-    remEl.addEventListener('click', removeUserSym.bind(this), true);
+        remEl.classList.add('demo-user_sym-remove');
+        remEl.textContent = '×';
+        remEl.addEventListener('click', removeUserSym.bind(this), true);
     li.appendChild(remEl);
+
+    const symEl = document.createElement('div');
+        symEl.classList.add('demo-user_sym-sym');
+        symEl.textContent = obj.sym;
+    li.appendChild(symEl);
+
     list.appendChild(li);
     saveUserAbc();
     abc_u = abc.concat(userAbc);
@@ -301,4 +313,172 @@ parseDemo = function() {
 importFromDesigner = function() {
     const output = document.querySelector('.demo-add_sym-model');
     output.value = modelStr;
+}
+
+renderSym = function(symObj) {
+    if (typeof symObj !== 'object' || symObj === null) {
+        return '×'
+    };
+
+    let symEl = document.createElement('div');
+    symEl.classList.add('sym');
+    symEl.dataset.sym = symObj.sym;
+    let symColsNum = 0;
+
+    symObj.model.forEach(col => {
+        let colEl = document.createElement('div');
+        colEl.classList.add('col');
+        const cellsArr = col.split(',');
+
+        cellsArr.forEach(cell => {
+            let cellEl = document.createElement('div');
+            cellEl.classList.add('cell', 'sol');
+
+            let before = true;
+            const reg = /(\d+)/;
+            const parsedCellModelArr = cell.split(reg);
+
+            parsedCellModelArr.forEach(part => {
+                reg.test(part) && (before = false);
+                const tokensArr = part.split('');
+
+                tokensArr.forEach(token => {
+                    switch(token) {
+                        case '<':
+                            if (before) {
+                                cellEl.classList.add('d-tl')
+                            } else {
+                                cellEl.classList.add('d-bl')
+                            }
+                            break
+                        case '>':
+                            if (before) {
+                                cellEl.classList.add('d-tr')
+                            } else {
+                                cellEl.classList.add('d-br')
+                            }
+                            break
+                        case '(':
+                            if (before) {
+                                cellEl.classList.add('rs-tl')
+                            } else {
+                                cellEl.classList.add('rs-bl')
+                            }
+                            break
+                        case ')':
+                            if (before) {
+                                cellEl.classList.add('rs-tr')
+                            } else {
+                                cellEl.classList.add('rs-br')
+                            }
+                            break
+                        case '0':
+                            cellEl.classList.remove('sol')
+                            break
+                        case '1':
+                            cellEl.classList.add('s1')
+                            break
+                        case '2':
+                            cellEl.classList.add('s2')
+                            break
+                        case '3':
+                            cellEl.classList.add('s3')
+                            break
+                        case '4':
+                            cellEl.classList.add('s4')
+                            break
+                        case '5':
+                            cellEl.classList.add('s5')
+                            break
+                        case '6':
+                            cellEl.classList.add('s6')
+                            break
+                    }
+                });
+            });
+            colEl.appendChild(cellEl);
+        });
+        symEl.appendChild(colEl);
+        symColsNum++;
+    });
+    symEl.style.width = (symColsNum * .75) + 'em';
+
+    return symEl;
+}
+
+parseModelToDemo = function(model) {
+    if (!modelRegex.test(model)) {
+        console.error('Wrong symbol model');
+        return false
+    }
+
+    const demo = document.querySelector('.demo');
+
+    demo.querySelectorAll('.demo-col').forEach(c => {
+        c.remove();
+    })
+
+    model = eval(model);
+    model.forEach(mCol => {
+        createCol();
+        const col = demo.querySelector('.demo-col:last-of-type');
+        const cellslArr = mCol.split(',');
+        let curCell = 0;
+
+        cellslArr.forEach(c => {
+            if (c.includes('0')) {
+                curCell += parseInt(c.match(/[1-6]/)[0]);
+                return
+            }
+
+            const l = parseInt(c.match(/\d+/)[0]);
+            const cellEnd = curCell + l;
+            const cellElsArr = Array.from(col.querySelectorAll('.demo-cell')).slice(curCell, cellEnd);
+
+            cellElsArr.forEach(el => el.click());
+            cellElsArr.forEach(el => el.querySelector('.demo-link').click());
+
+
+            const firstMods = c.match(/^[()<>]*/)[0];
+            const lastMods = c.match(/[()<>]*$/)[0];
+            const firstCell = cellElsArr[0];
+            const lastCell = cellElsArr[cellElsArr.length - 1];
+
+            firstMods.split('').forEach(t => {
+                switch (t) {
+                    case '<':
+                        firstCell.querySelector('.demo-d_tl').classList.add('active');
+                        break
+                    case '>':
+                        firstCell.querySelector('.demo-d_tr').classList.add('active');
+                        break
+                    case '(':
+                        firstCell.querySelector('.demo-rs_tl').classList.add('inactive');
+                        break
+                    case ')':
+                        firstCell.querySelector('.demo-rs_tr').classList.add('inactive');
+                        break
+                }
+            });
+
+            lastMods.split('').forEach(t => {
+                switch (t) {
+                    case '<':
+                        lastCell.querySelector('.demo-d_bl').classList.add('active');
+                        break
+                    case '>':
+                        lastCell.querySelector('.demo-d_br').classList.add('active');
+                        break
+                    case '(':
+                        lastCell.querySelector('.demo-rs_bl').classList.add('inactive');
+                        break
+                    case ')':
+                        lastCell.querySelector('.demo-rs_br').classList.add('inactive');
+                        break
+                }
+            });
+
+            curCell += l;
+        });
+    })
 }

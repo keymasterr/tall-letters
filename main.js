@@ -3,6 +3,7 @@ let disp = document.querySelector('.display');
 let preferUser = false;
 let highlightUser = false;
 let abc_u = abc;
+const modelRegex = /^\[(\'[<>()]*0?[1-6][<>()]*(,[<>()]*0?[1-6][<>()]*)*\')(,\'[<>()]*0?[1-6][<>()]*(,[<>()]*0?[1-6][<>()]*)*\')*\]$/;
 
 inp.value = 'tall letters';
 inp.addEventListener('input', function() {
@@ -47,11 +48,11 @@ render = function(text) {
                     cellEl.classList.add('cell', 'sol');
 
                     let before = true;
-                    const reg = /(\d+)/;
-                    const parsedCellModelArr = cell.split(reg);
+                    const regDigits = /(\d+)/;
+                    const parsedCellModelArr = cell.split(regDigits);
 
                     parsedCellModelArr.forEach(part => {
-                        reg.test(part) && (before = false);
+                        regDigits.test(part) && (before = false);
                         const tokensArr = part.split('');
 
                         tokensArr.forEach(token => {
