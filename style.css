@@ -70,7 +70,7 @@ article {
     margin: 0 auto var(--gap);
     padding: calc(var(--gap) / 2);
     outline: none;
-    border: 1px solid #e5e4e2;
+    border: 1px solid var(--input-bd);
     /* position: absolute !important;
     top: -9999px !important;
     left: -9999px !important; */

@@ -44,7 +44,7 @@
     font-size: 20px;
     padding: calc(var(--gap) / 2);
     outline: none;
-    border: 1px solid #e5e4e2;
+    border: 1px solid var(--input-bd);
 }
 .demo-add_sym-sym {
     width: 1.5em;
@@ -55,7 +55,7 @@
     cursor: pointer;
 }
 .demo-add_sym-submit {
-    color: var(--gray);
+    color: var(--input-bd);
 }
 .demo-add_sym-error {
     color: rgb(197, 64, 64);
