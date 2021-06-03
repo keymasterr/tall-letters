@@ -508,3 +508,13 @@ parseModelToDemo = function(model) {
         });
     })
 }
+
+compressUserAbc = function() {
+    arr = [...userAbc];
+    arr.forEach(el => {
+        if (el.hasOwnProperty('author')) {
+            delete el.author;
+        }
+    });
+    return JSON.stringify(arr)
+}

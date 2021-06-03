@@ -6,7 +6,7 @@
 - [X] “highlight user glyphs” checkbox
 - [ ] controls for border radius, link dashes and gap width
 - [X] table with user's glyphs
-- [ ] table with initial glyphs
+- [X] table with initial glyphs
 - [X] glyph preview next to the added model (click to load to glyph designer)
 - [ ] save user settings between sessions
 - [ ] show and remove non-existing glyphs
