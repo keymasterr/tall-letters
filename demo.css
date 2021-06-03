@@ -1,7 +1,12 @@
 .demo-container {
-    max-width: 600px;
+    display: grid;
+    grid-template-columns: [aside-start] 1fr [aside-end content-start] 1fr 1fr [content-end];
+    grid-gap: 3em;
     margin: 0 auto;
 }
+
+.demo-aside { grid-column: aside; }
+.demo-content { grid-column: content; }
 
 .demo {
     position: relative;
@@ -14,7 +19,7 @@
     height: calc(300px + (2 * var(--rs)));
     background: var(--bg);
     padding: var(--rs);
-    margin: 3em auto 1em;
+    margin-bottom: 1em;
     border-radius: var(--rs);
     line-height: 1;
     user-select: none;
@@ -22,6 +27,7 @@
 }
 
 .demo-text {
+    display: none;
     line-height: 1.3;
 }
 .hl-r { color: rgb(197, 64, 64); font-weight: bold; }
@@ -29,8 +35,8 @@
 .hl-g { color: green; font-weight: bold; }
 .hl-gr { color: var(--gray);}
 
-.demo-add_sym-form {
-    text-align: center;
+.demo-add_sym {
+    text-align: right;
 }
 .demo-add_sym input {
     font-size: 20px;
@@ -42,48 +48,73 @@
     width: 1.5em;
     text-align: center;
 }
-.demo-add_sym-submit {}
-demo-add_sym-error {
+.demo-add_sym-sym:valid ~ .demo-add_sym-submit {
+    color: unset;
+    cursor: pointer;
+}
+.demo-add_sym-submit {
+    color: var(--gray);
+}
+.demo-add_sym-error {
     color: rgb(197, 64, 64);
 }
 
-.demo-user_syms {
+.demo-syms-container {
+    margin-bottom: 3em;
+}
+
+.demo-syms-title {
+    display: flex;
+    align-items: baseline;
+    gap: 1em;
+}
+
+.demo-syms-placeholder {
+    display: none;
+    color: var(--gray);
+}
+.demo-syms-placeholder:last-child { display: block; }
+
+.demo-syms {
     padding: 0;
-    padding-left: 1em;
     list-style-type: none;
     font-family: monospace;
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(4em, 1fr));
+    grid-gap: 1em;
 }
-.demo-user_syms li {
+.demo-syms li {
     position: relative;
     line-height: 1.5;
+    padding-left: 1em;
 }
-.demo-user_syms .sym {
+.demo-syms .sym {
     --gap: 4px;
     --rs: .5em;
     height: 3em;
     cursor: pointer;
 }
-.demo-user_sym-remove {
+.demo-sym-remove {
     position: absolute;
+    display: none;
     width: .6em;
     text-align: right;
     color: rgb(223, 130, 134);
-    left: -1em;
+    left: 0;
     top: 0;
     user-select: none;
     -webkit-user-select: none;
     cursor: pointer;
 }
-.demo-user_sym-remove:hover { color: var(--link-h);}
+.demo-sym-remove:hover { color: var(--link-h);}
+.demo-syms li:hover .demo-sym-remove {display: block;}
 
-.demo-user_sym-sym {
+.demo-sym-sym {
     position: absolute;
     width: .6em;
     text-align: right;
     color: var(--gray);
-    left: -1em;
+    left: 0;
     bottom: 0;
     user-select: none;
     -webkit-user-select: none;
@@ -292,3 +323,8 @@ demo-rs_bl
 demo-rs_br
 demo-link
 */
+
+.footer-likely { grid-column: 1 / 3; }
+.footer-text { grid-column: 3; }
+
+div.likely { display: block; }

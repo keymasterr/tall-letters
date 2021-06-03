@@ -1,7 +1,5 @@
 let abc = [
-    {sym: ' ', model: ['06']}
-,   {sym: ' ', model: ['06']}
-,   {sym: 'a', model: ['(2,>(4(','<)6<']}
+    {sym: 'a', model: ['(2,>(4(','<)6<']}
 ,   {sym: 'b', model: ['6','01,<)5<)']}
 ,   {sym: 'c', model: ['(6(','<)2,02,2<)']}
 ,   {sym: 'd', model: ['01,>(5(','6<']}
@@ -28,6 +26,8 @@ let abc = [
 ,   {sym: 'x', model: ['3(,(3','3)<,<)3']}
 ,   {sym: 'y', model: ['4(>,2(','6)<']}
 ,   {sym: 'z', model: ['2,(>4','<3),01,2<']}
+,   {sym: ' ', model: ['06']}
+,   {sym: ' ', model: ['06']}
 ]
 abc.forEach(sym => {
     sym.author = 'keymasterr';

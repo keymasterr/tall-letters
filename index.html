@@ -11,6 +11,7 @@
     <script src="main.js" defer></script>
     <link rel="stylesheet" href="demo.css">
     <script src="demo.js"></script>
+    <link href="likely.css" rel="stylesheet">
 </head>
 <body>
     <main>
@@ -22,170 +23,206 @@
     <article>
         <form onsubmit="inp.blur(); event.preventDefault();" class="main-input">
             <input class="text-input" type="text" value="tall letters" title="Was going to hide this box, but meh. It's ok to have one">
-            <input type="checkbox" name="prefer-user" id="prefer-user" onclick="preferUser = !preferUser"> <label for="prefer-user">Prefer user's glyphs</label>
-            <input type="checkbox" name="highlight-user" id="highlight-user" onclick="highlightUserToggle()"> <label for="highlight-user">Highlight user's glyphs</label>
         </form>
 
         <div class="demo-container">
-            <div class="demo">
-                <div class="add-col-btn">+</div>
-                <div class="demo-col">
-                    <div class="demo-cell active linkable first-chain-cell">
-                        <div class="demo-d_tl"></div>
-                        <div class="demo-d_tr"></div>
-                        <div class="demo-d_bl"></div>
-                        <div class="demo-d_br"></div>
-                        <div class="demo-rs_tl inactive"></div>
-                        <div class="demo-rs_tr"></div>
-                        <div class="demo-rs_bl"></div>
-                        <div class="demo-rs_br"></div>
-                        <div class="demo-link linked"></div>
+            <div class="demo-aside">
+                <div class="demo">
+                    <div class="add-col-btn">+</div>
+                    <div class="demo-col">
+                        <div class="demo-cell active linkable first-chain-cell">
+                            <div class="demo-d_tl"></div>
+                            <div class="demo-d_tr"></div>
+                            <div class="demo-d_bl"></div>
+                            <div class="demo-d_br"></div>
+                            <div class="demo-rs_tl inactive"></div>
+                            <div class="demo-rs_tr"></div>
+                            <div class="demo-rs_bl"></div>
+                            <div class="demo-rs_br"></div>
+                            <div class="demo-link linked"></div>
+                        </div>
+                        <div class="demo-cell active linkable chain-cell">
+                            <div class="demo-d_tl"></div>
+                            <div class="demo-d_tr"></div>
+                            <div class="demo-d_bl"></div>
+                            <div class="demo-d_br"></div>
+                            <div class="demo-rs_tl"></div>
+                            <div class="demo-rs_tr"></div>
+                            <div class="demo-rs_bl"></div>
+                            <div class="demo-rs_br"></div>
+                            <div class="demo-link linked"></div>
+                        </div>
+                        <div class="demo-cell active last-chain-cell">
+                            <div class="demo-d_tl"></div>
+                            <div class="demo-d_tr"></div>
+                            <div class="demo-d_bl"></div>
+                            <div class="demo-d_br"></div>
+                            <div class="demo-rs_tl"></div>
+                            <div class="demo-rs_tr"></div>
+                            <div class="demo-rs_bl inactive"></div>
+                            <div class="demo-rs_br"></div>
+                            <div class="demo-link"></div>
+                        </div>
+                        <div class="demo-cell">
+                            <div class="demo-d_tl"></div>
+                            <div class="demo-d_tr"></div>
+                            <div class="demo-d_bl"></div>
+                            <div class="demo-d_br"></div>
+                            <div class="demo-rs_tl"></div>
+                            <div class="demo-rs_tr"></div>
+                            <div class="demo-rs_bl"></div>
+                            <div class="demo-rs_br"></div>
+                            <div class="demo-link"></div>
+                        </div>
+                        <div class="demo-cell active linkable first-chain-cell">
+                            <div class="demo-d_tl"></div>
+                            <div class="demo-d_tr"></div>
+                            <div class="demo-d_bl"></div>
+                            <div class="demo-d_br"></div>
+                            <div class="demo-rs_tl"></div>
+                            <div class="demo-rs_tr"></div>
+                            <div class="demo-rs_bl"></div>
+                            <div class="demo-rs_br"></div>
+                            <div class="demo-link linked"></div>
+                        </div>
+                        <div class="demo-cell active last-chain-cell">
+                            <div class="demo-d_tl"></div>
+                            <div class="demo-d_tr"></div>
+                            <div class="demo-d_bl"></div>
+                            <div class="demo-d_br active"></div>
+                            <div class="demo-rs_tl"></div>
+                            <div class="demo-rs_tr"></div>
+                            <div class="demo-rs_bl inactive"></div>
+                            <div class="demo-rs_br"></div>
+                            <div class="demo-link"></div>
+                        </div>
+                        <div class="remove-col-btn">×</div>
                     </div>
-                    <div class="demo-cell active linkable chain-cell">
-                        <div class="demo-d_tl"></div>
-                        <div class="demo-d_tr"></div>
-                        <div class="demo-d_bl"></div>
-                        <div class="demo-d_br"></div>
-                        <div class="demo-rs_tl"></div>
-                        <div class="demo-rs_tr"></div>
-                        <div class="demo-rs_bl"></div>
-                        <div class="demo-rs_br"></div>
-                        <div class="demo-link linked"></div>
+                    <div class="demo-col">
+                        <div class="demo-cell active linkable first-chain-cell">
+                            <div class="demo-d_tl active"></div>
+                            <div class="demo-d_tr"></div>
+                            <div class="demo-d_bl"></div>
+                            <div class="demo-d_br"></div>
+                            <div class="demo-rs_tl"></div>
+                            <div class="demo-rs_tr inactive"></div>
+                            <div class="demo-rs_bl"></div>
+                            <div class="demo-rs_br"></div>
+                            <div class="demo-link linked"></div>
+                        </div>
+                        <div class="demo-cell active linkable last-chain-cell">
+                            <div class="demo-d_tl"></div>
+                            <div class="demo-d_tr"></div>
+                            <div class="demo-d_bl"></div>
+                            <div class="demo-d_br"></div>
+                            <div class="demo-rs_tl"></div>
+                            <div class="demo-rs_tr"></div>
+                            <div class="demo-rs_bl"></div>
+                            <div class="demo-rs_br"></div>
+                            <div class="demo-link"></div>
+                        </div>
+                        <div class="demo-cell active linkable first-chain-cell">
+                            <div class="demo-d_tl active"></div>
+                            <div class="demo-d_tr"></div>
+                            <div class="demo-d_bl"></div>
+                            <div class="demo-d_br"></div>
+                            <div class="demo-rs_tl"></div>
+                            <div class="demo-rs_tr inactive"></div>
+                            <div class="demo-rs_bl"></div>
+                            <div class="demo-rs_br"></div>
+                            <div class="demo-link linked"></div>
+                        </div>
+                        <div class="demo-cell active linkable chain-cell">
+                            <div class="demo-d_tl"></div>
+                            <div class="demo-d_tr"></div>
+                            <div class="demo-d_bl"></div>
+                            <div class="demo-d_br"></div>
+                            <div class="demo-rs_tl"></div>
+                            <div class="demo-rs_tr"></div>
+                            <div class="demo-rs_bl"></div>
+                            <div class="demo-rs_br"></div>
+                            <div class="demo-link linked"></div>
+                        </div>
+                        <div class="demo-cell active linkable chain-cell">
+                            <div class="demo-d_tl"></div>
+                            <div class="demo-d_tr"></div>
+                            <div class="demo-d_bl"></div>
+                            <div class="demo-d_br"></div>
+                            <div class="demo-rs_tl"></div>
+                            <div class="demo-rs_tr"></div>
+                            <div class="demo-rs_bl"></div>
+                            <div class="demo-rs_br"></div>
+                            <div class="demo-link linked"></div>
+                        </div>
+                        <div class="demo-cell active last-chain-cell">
+                            <div class="demo-d_tl"></div>
+                            <div class="demo-d_tr"></div>
+                            <div class="demo-d_bl"></div>
+                            <div class="demo-d_br"></div>
+                            <div class="demo-rs_tl"></div>
+                            <div class="demo-rs_tr"></div>
+                            <div class="demo-rs_bl"></div>
+                            <div class="demo-rs_br inactive"></div>
+                            <div class="demo-link"></div>
+                        </div>
+                        <div class="remove-col-btn">×</div>
                     </div>
-                    <div class="demo-cell active last-chain-cell">
-                        <div class="demo-d_tl"></div>
-                        <div class="demo-d_tr"></div>
-                        <div class="demo-d_bl"></div>
-                        <div class="demo-d_br"></div>
-                        <div class="demo-rs_tl"></div>
-                        <div class="demo-rs_tr"></div>
-                        <div class="demo-rs_bl inactive"></div>
-                        <div class="demo-rs_br"></div>
-                        <div class="demo-link"></div>
-                    </div>
-                    <div class="demo-cell">
-                        <div class="demo-d_tl"></div>
-                        <div class="demo-d_tr"></div>
-                        <div class="demo-d_bl"></div>
-                        <div class="demo-d_br"></div>
-                        <div class="demo-rs_tl"></div>
-                        <div class="demo-rs_tr"></div>
-                        <div class="demo-rs_bl"></div>
-                        <div class="demo-rs_br"></div>
-                        <div class="demo-link"></div>
-                    </div>
-                    <div class="demo-cell active linkable first-chain-cell">
-                        <div class="demo-d_tl"></div>
-                        <div class="demo-d_tr"></div>
-                        <div class="demo-d_bl"></div>
-                        <div class="demo-d_br"></div>
-                        <div class="demo-rs_tl"></div>
-                        <div class="demo-rs_tr"></div>
-                        <div class="demo-rs_bl"></div>
-                        <div class="demo-rs_br"></div>
-                        <div class="demo-link linked"></div>
-                    </div>
-                    <div class="demo-cell active last-chain-cell">
-                        <div class="demo-d_tl"></div>
-                        <div class="demo-d_tr"></div>
-                        <div class="demo-d_bl"></div>
-                        <div class="demo-d_br active"></div>
-                        <div class="demo-rs_tl"></div>
-                        <div class="demo-rs_tr"></div>
-                        <div class="demo-rs_bl inactive"></div>
-                        <div class="demo-rs_br"></div>
-                        <div class="demo-link"></div>
-                    </div>
-                    <div class="remove-col-btn">×</div>
                 </div>
-                <div class="demo-col">
-                    <div class="demo-cell active linkable first-chain-cell">
-                        <div class="demo-d_tl active"></div>
-                        <div class="demo-d_tr"></div>
-                        <div class="demo-d_bl"></div>
-                        <div class="demo-d_br"></div>
-                        <div class="demo-rs_tl"></div>
-                        <div class="demo-rs_tr inactive"></div>
-                        <div class="demo-rs_bl"></div>
-                        <div class="demo-rs_br"></div>
-                        <div class="demo-link linked"></div>
-                    </div>
-                    <div class="demo-cell active linkable last-chain-cell">
-                        <div class="demo-d_tl"></div>
-                        <div class="demo-d_tr"></div>
-                        <div class="demo-d_bl"></div>
-                        <div class="demo-d_br"></div>
-                        <div class="demo-rs_tl"></div>
-                        <div class="demo-rs_tr"></div>
-                        <div class="demo-rs_bl"></div>
-                        <div class="demo-rs_br"></div>
-                        <div class="demo-link"></div>
-                    </div>
-                    <div class="demo-cell active linkable first-chain-cell">
-                        <div class="demo-d_tl active"></div>
-                        <div class="demo-d_tr"></div>
-                        <div class="demo-d_bl"></div>
-                        <div class="demo-d_br"></div>
-                        <div class="demo-rs_tl"></div>
-                        <div class="demo-rs_tr inactive"></div>
-                        <div class="demo-rs_bl"></div>
-                        <div class="demo-rs_br"></div>
-                        <div class="demo-link linked"></div>
-                    </div>
-                    <div class="demo-cell active linkable chain-cell">
-                        <div class="demo-d_tl"></div>
-                        <div class="demo-d_tr"></div>
-                        <div class="demo-d_bl"></div>
-                        <div class="demo-d_br"></div>
-                        <div class="demo-rs_tl"></div>
-                        <div class="demo-rs_tr"></div>
-                        <div class="demo-rs_bl"></div>
-                        <div class="demo-rs_br"></div>
-                        <div class="demo-link linked"></div>
-                    </div>
-                    <div class="demo-cell active linkable chain-cell">
-                        <div class="demo-d_tl"></div>
-                        <div class="demo-d_tr"></div>
-                        <div class="demo-d_bl"></div>
-                        <div class="demo-d_br"></div>
-                        <div class="demo-rs_tl"></div>
-                        <div class="demo-rs_tr"></div>
-                        <div class="demo-rs_bl"></div>
-                        <div class="demo-rs_br"></div>
-                        <div class="demo-link linked"></div>
-                    </div>
-                    <div class="demo-cell active last-chain-cell">
-                        <div class="demo-d_tl"></div>
-                        <div class="demo-d_tr"></div>
-                        <div class="demo-d_bl"></div>
-                        <div class="demo-d_br"></div>
-                        <div class="demo-rs_tl"></div>
-                        <div class="demo-rs_tr"></div>
-                        <div class="demo-rs_bl"></div>
-                        <div class="demo-rs_br inactive"></div>
-                        <div class="demo-link"></div>
-                    </div>
-                    <div class="remove-col-btn">×</div>
+
+                <div class="demo-add_sym">
+                    <form onsubmit="addUserSym()" class="demo-add_sym-form">
+                        Symbol
+                        <input type="text" class="demo-add_sym-sym" maxlength="1" required>
+                        <input type="hidden" class="demo-add_sym-model" required>
+                        <input type="submit" class="demo-add_sym-submit" value="Add →">
+                        <div class="demo-add_sym-error"></div>
+                    </form>
+                </div>
+
+                <div class="demo-text">
+                    <p align="center">
+                        This is how letter <em>s</em> glyph is built:
+                        <br>
+                        <code><span class="hl-gr">{sym: '</span><span class="demo-sym-output">s</span><span class="hl-gr">', model: [</span><span class="demo-model-output">'<span class="hl-g">(></span><span class="hl-r">3</span><span class="hl-b">(</span>,<span class="hl-r">01</span>,<span class="hl-r">2</span><span class="hl-b">(</span>','<span class="hl-g">)</span><span class="hl-r">2</span>,<span class="hl-g"><span class="hl-g">&lt;)</span></span><span class="hl-r">4</span><span class="hl-b">&lt;)</span>'</span><span class="hl-gr">]}</span></code>
+                    </p>
+                    <p class="demo-description">Where [model] is an array of two 'column','column' each 6 cells high. <span class="hl-r">Digits</span> mean consequent united cells and <span class="hl-r">digit with zero</span> means gap of a certain size. Symbols ‘&lt;>’ are for left and right side dashes and parenthesis ‘()’ mean left and right corner roundings. Their position <span class="hl-g">before</span> a <span class="hl-r">digit</span> or <span class="hl-b">after</span> one determines whether <span class="hl-g">top</span> or <span class="hl-b">bottom</span> side will be affected. Different cell groups inside of 'column' are separated by com,mas.</p>
                 </div>
             </div>
 
-            <div class="demo-text">
-                <p align="center">
-                    This is how letter <em>s</em> glyph is built:
-                    <br>
-                    <code><span class="hl-gr">{sym: '</span><span class="demo-sym-output">s</span><span class="hl-gr">', model: [</span><span class="demo-model-output">'<span class="hl-g">(></span><span class="hl-r">3</span><span class="hl-b">(</span>,<span class="hl-r">01</span>,<span class="hl-r">2</span><span class="hl-b">(</span>','<span class="hl-g">)</span><span class="hl-r">2</span>,<span class="hl-g"><span class="hl-g">&lt;)</span></span><span class="hl-r">4</span><span class="hl-b">&lt;)</span>'</span><span class="hl-gr">]}</span></code>
-                </p>
-                <p class="demo-description">Where [model] is an array of two 'column','column' each 6 cells high. <span class="hl-r">Digits</span> mean consequent united cells and <span class="hl-r">digit with zero</span> means gap of a certain size. Symbols ‘&lt;>’ are for left and right side dashes and parenthesis ‘()’ mean left and right corner roundings. Their position <span class="hl-g">before</span> a <span class="hl-r">digit</span> or <span class="hl-b">after</span> one determines whether <span class="hl-g">top</span> or <span class="hl-b">bottom</span> side will be affected. Different cell groups inside of 'column' are separated by com,mas.</p>
+            <div class="demo-content">
+                <div class="user_syms demo-syms-container">
+                    <div class="demo-syms-title">
+                        <h4>Custom glyphs</h4>
+                        <div>
+                            <input type="checkbox" name="prefer-user" id="prefer-user" onclick="preferUser = !preferUser"> <label for="prefer-user">prefer</label>
+                        </div>
+                        <div>
+                            <input type="checkbox" name="highlight-user" id="highlight-user" onclick="highlightUserToggle()"> <label for="highlight-user">highlight</label>
+                        </div>
+                    </div>
+                    <ul class="demo-syms">
+                        <span class="demo-syms-placeholder">← Create them yourself</span>
+                    </ul>
+                </div>
+
+                <div class="init_syms demo-syms-container">
+                    <div class="demo-syms-title">
+                        <h4>Initial glyphs</h4>
+                    </div>
+                    <ul class="demo-syms"></ul>
+                </div>
             </div>
-            <div class="demo-add_sym">
-                <form onsubmit="addUserSym()" class="demo-add_sym-form">
-                    Here, create one yourself:
-                    <br><br>
-                    <span class="hl-gr">{sym: '</span><input type="text" class="demo-add_sym-sym" maxlength="1" required><span class="hl-gr">', model: [</span><input type="text" class="demo-add_sym-model" required><span class="hl-gr">]}</span>
-                    <input type="submit" class="demo-add_sym-submit" value="Add">
-                    <div class="demo-add_sym-error"></div>
-                </form>
-                <ul class="demo-user_syms"></ul>
+
+            <div class="footer-likely">
+                <div class="likely likely-big">
+                    <div class="facebook">Share</div>
+                    <div class="twitter" data-via="keymasterr">Tweet</div>
+                    <div class="reddit">Share</div>
+                    <div class="telegram">Send</div>
+                    <div class="pinterest">Pin</div>
+                </div>
+            </div>
+            <div class="footer-text">
                 <small>I will be happy to add new symbols to the actual list if you'll come up with some nice results. Drop me a letter.</small>
             </div>
         </div>
@@ -204,5 +241,6 @@
         </div>
     </footer>
 
+    <script src="likely.js" type="text/javascript"></script>
 </body>
 </html>

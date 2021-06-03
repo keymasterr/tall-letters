@@ -42,6 +42,8 @@ a:hover {
     transition: color 0s;
 }
 
+h4 { margin: 0; }
+
 main {
     position: relative;
     height: 90vh;
@@ -49,9 +51,9 @@ main {
 
 article {
     width: 100%;
-    max-width: calc(840px - (2 * var(--gap)));
+    max-width: calc(1024px - (2 * var(--gap)));
     margin: 0 auto;
-    padding: var(--gap) calc(3 * var(--gap)) calc(10 * var(--gap));
+    padding: var(--gap) calc(3 * var(--gap)) calc(3 * var(--gap));
     background: var(--article-bg);
     min-height: 100vh;
     border-radius: 2px;
@@ -59,6 +61,7 @@ article {
 
 .main-input {
     text-align: center;
+    margin-bottom: 3em;
 }
 
 .text-input {
@@ -181,7 +184,7 @@ article {
 footer {
     display: flex;
     width: 100%;
-    max-width: calc(840px - (2 * var(--gap)));
+    max-width: calc(1024px - (2 * var(--gap)));
     margin: var(--gap) auto;
 }
 .footer-left {

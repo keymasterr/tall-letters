@@ -3,10 +3,36 @@ let userAbc = [];
 let modelStr = '';
 document.addEventListener('DOMContentLoaded', function(event) {
     createDemo();
+    renderInitialAbc();
     parseUserAbc();
-
-
+    parseDemo();
 });
+
+renderInitialAbc = function() {
+    const list = document.querySelector('.init_syms .demo-syms');
+
+    abc.forEach(obj => {
+        const li = document.createElement('li');
+        const renderedSymEl = renderSym(obj);
+        let model = [];
+        obj.model.forEach(str => {
+            const a = "'"+ str +"'";
+            model.push(a);
+        });
+        const modelStr = model.join(',');
+        let text = "{sym: '"+ obj.sym +"', model: ["+ modelStr +"]}";
+        renderedSymEl.addEventListener('click', parseModelToDemo.bind(this, '['+ modelStr +']'));
+        li.appendChild(renderedSymEl);
+        li.title = text;
+
+        const symEl = document.createElement('div');
+            symEl.classList.add('demo-sym-sym');
+            symEl.textContent = obj.sym;
+        li.appendChild(symEl);
+
+        list.appendChild(li);
+    });
+}
 
 
 parseUserAbc = function() {
@@ -47,11 +73,11 @@ addUserSym = function() {
 
     errorEl.innerHTML = '';
     inpSym.value = '';
-    inpMod.value = '';
+    // inpMod.value = '';
 }
 removeUserSym = function(click) {
     const li = click.target.parentElement;
-    const ndx = Array.from(li.parentNode.children).indexOf(li);
+    const ndx = parseInt(Array.from(li.parentNode.children).indexOf(li) - 1);
     userAbc.splice(ndx, 1);
     saveUserAbc();
     abc_u = abc.concat(userAbc);
@@ -65,10 +91,10 @@ useUserSym = function(obj) {
         const a = "'"+ str +"'";
         model.push(a);
     });
-    const modelStr = model.join(',')
+    const modelStr = model.join(',');
     let text = "{sym: '"+ obj.sym +"', model: ["+ modelStr +"]}";
 
-    const list = document.querySelector('.demo-user_syms');
+    const list = document.querySelector('.user_syms .demo-syms');
     const li = document.createElement('li');
     const renderedSymEl = renderSym(obj);
     renderedSymEl.addEventListener('click', parseModelToDemo.bind(this, '['+ modelStr +']'));
@@ -76,13 +102,13 @@ useUserSym = function(obj) {
     li.title = text;
 
     const remEl = document.createElement('div');
-        remEl.classList.add('demo-user_sym-remove');
+        remEl.classList.add('demo-sym-remove');
         remEl.textContent = '×';
         remEl.addEventListener('click', removeUserSym.bind(this), true);
     li.appendChild(remEl);
 
     const symEl = document.createElement('div');
-        symEl.classList.add('demo-user_sym-sym');
+        symEl.classList.add('demo-sym-sym');
         symEl.textContent = obj.sym;
     li.appendChild(symEl);
 
@@ -447,16 +473,16 @@ parseModelToDemo = function(model) {
             firstMods.split('').forEach(t => {
                 switch (t) {
                     case '<':
-                        firstCell.querySelector('.demo-d_tl').classList.add('active');
+                        firstCell.querySelector('.demo-d_tl').click();
                         break
                     case '>':
-                        firstCell.querySelector('.demo-d_tr').classList.add('active');
+                        firstCell.querySelector('.demo-d_tr').click();
                         break
                     case '(':
-                        firstCell.querySelector('.demo-rs_tl').classList.add('inactive');
+                        firstCell.querySelector('.demo-rs_tl').click();
                         break
                     case ')':
-                        firstCell.querySelector('.demo-rs_tr').classList.add('inactive');
+                        firstCell.querySelector('.demo-rs_tr').click();
                         break
                 }
             });
@@ -464,16 +490,16 @@ parseModelToDemo = function(model) {
             lastMods.split('').forEach(t => {
                 switch (t) {
                     case '<':
-                        lastCell.querySelector('.demo-d_bl').classList.add('active');
+                        lastCell.querySelector('.demo-d_bl').click();
                         break
                     case '>':
-                        lastCell.querySelector('.demo-d_br').classList.add('active');
+                        lastCell.querySelector('.demo-d_br').click();
                         break
                     case '(':
-                        lastCell.querySelector('.demo-rs_bl').classList.add('inactive');
+                        lastCell.querySelector('.demo-rs_bl').click();
                         break
                     case ')':
-                        lastCell.querySelector('.demo-rs_br').classList.add('inactive');
+                        lastCell.querySelector('.demo-rs_br').click();
                         break
                 }
             });
