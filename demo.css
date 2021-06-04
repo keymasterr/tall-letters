@@ -79,12 +79,13 @@
 .demo-syms-placeholder:last-child { display: block; }
 
 .demo-syms {
-    padding: 0;
-    list-style-type: none;
-    font-family: monospace;
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(4em, 1fr));
     grid-gap: 1em;
+    width: 100%;
+    padding: 0;
+    list-style-type: none;
+    font-family: monospace;
 }
 .demo-syms li {
     position: relative;
@@ -92,9 +93,9 @@
     padding-left: 1em;
 }
 .demo-syms .sym {
-    --gap: 4px;
+    --gap: 3px;
     --rs: .5em;
-    height: 3em;
+    height: 57px;
     cursor: pointer;
 }
 .demo-sym-remove {
@@ -111,6 +112,8 @@
 }
 .demo-sym-remove:hover { color: var(--link-h);}
 .demo-syms li:hover .demo-sym-remove {display: block;}
+.demo-sym-remove.modal-sym-remove {display: block;}
+
 
 .demo-sym-sym {
     position: absolute;
@@ -118,7 +121,8 @@
     text-align: right;
     color: var(--gray);
     left: 0;
-    bottom: 0;
+    bottom: -1px;
+    line-height: 1;
     user-select: none;
     -webkit-user-select: none;
 }
@@ -334,6 +338,38 @@ div.likely {
     display: block;
     margin-bottom: 1em;
 }
+
+
+body.modal-lock {
+    overflow: hidden;
+    background-color: var(--gray);
+}
+.modal-wrapper {
+    display: block;
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    overflow: auto;
+}
+.modal {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    width: 90vw;
+    max-width: 920px;
+    margin: 4em auto 6em;
+    padding: 4em 6em 6em 5em;
+    background: var(--bg);
+    outline: none;
+    user-select: auto;
+}
+body.modal-lock main
+, body.modal-lock article
+, body.modal-lock footer
+{ filter: opacity(.5) contrast(.5) grayscale(1); }
 
 
 @media screen and (max-width: 920px) {

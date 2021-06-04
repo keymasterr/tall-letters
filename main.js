@@ -140,8 +140,8 @@ lettersResize = function() {
     let scrollMod = 0;
     const scrollPos = window.scrollY;
     scrollMod = (90 * vh) - scrollPos;
-    if (scrollMod < 150) {
-        document.querySelector('.display-wrapper').style.setProperty('--scroll-mod', ((90 * vh) - 150) + 'px');
+    if (scrollMod < 152) {
+        document.querySelector('.display-wrapper').style.setProperty('--scroll-mod', ((90 * vh) - 152) + 'px');
     } else {
         document.querySelector('.display-wrapper').style.setProperty('--scroll-mod', scrollPos + 'px');
     }

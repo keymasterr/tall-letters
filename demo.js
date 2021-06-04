@@ -1,12 +1,77 @@
+const lib = JsonUrl('lzma');
 let userAbcLoaded;
 let userAbc = [];
 let modelStr = '';
+let importAbc = [];
+let shareLinkInput;
 document.addEventListener('DOMContentLoaded', function(event) {
     createDemo();
     renderInitialAbc();
     parseUserAbc();
     parseDemo();
+    readUrl();
+
+    shareLinkInput = document.querySelector('.share-link-input');
 });
+
+readUrl = function() {
+    const queryStr = window.location.search;
+    const urlParams = new URLSearchParams(queryStr);
+    const text = urlParams.get('str');
+    importAbc = urlParams.get('im');
+
+    if (text) {
+        inp.value = unescape(text);
+        render(inp.value);
+    }
+
+    if (importAbc) {
+        decompressUserAbc(importAbc);
+    }
+
+    window.history.replaceState({}, document.title, window.location.pathname);
+}
+
+removeImportSym = function(click) {
+    const li = click.target.parentElement;
+    const ndx = parseInt(Array.from(li.parentNode.children).indexOf(li) - 1);
+    importAbc.splice(ndx, 1);
+    li.remove();
+}
+renderImportAbc = function() {
+    const list = document.createElement('ul');
+    list.classList.add('demo-syms');
+
+    importAbc.forEach(obj => {
+        const li = document.createElement('li');
+        const renderedSymEl = renderSym(obj);
+        let model = [];
+        obj.model.forEach(str => {
+            const a = "'"+ str +"'";
+            model.push(a);
+        });
+
+        const modelStr = model.join(',');
+        let text = "{sym: '"+ obj.sym +"', model: ["+ modelStr +"]}";
+        li.appendChild(renderedSymEl);
+        li.title = text;
+
+        const symEl = document.createElement('div');
+            symEl.classList.add('demo-sym-sym');
+            symEl.textContent = obj.sym;
+        li.appendChild(symEl);
+
+        const remEl = document.createElement('div');
+            remEl.classList.add('demo-sym-remove','modal-sym-remove');
+            remEl.textContent = '×';
+            remEl.addEventListener('click', removeImportSym.bind(this), false);
+        li.appendChild(remEl);
+
+        list.appendChild(li);
+    });
+
+    return list
+}
 
 renderInitialAbc = function() {
     const list = document.querySelector('.init_syms .demo-syms');
@@ -82,6 +147,7 @@ removeUserSym = function(click) {
     saveUserAbc();
     abc_u = abc.concat(userAbc);
     li.remove();
+    stopPropagation();
 }
 useUserSym = function(obj) {
     abc_u.push(obj);
@@ -509,6 +575,17 @@ parseModelToDemo = function(model) {
     })
 }
 
+decompressUserAbc = function(str) {
+    lib.decompress(str).then(output => {
+        importAbc = [...output];
+        importAbc.forEach(el => {
+            el.author = 'import';
+        });
+
+        createModal(renderImportAbc());
+    });
+}
+
 compressUserAbc = function() {
     arr = [...userAbc];
     arr.forEach(el => {
@@ -516,5 +593,70 @@ compressUserAbc = function() {
             delete el.author;
         }
     });
-    return JSON.stringify(arr)
+    lib.compress(arr).then(output => {
+        const newLink = new URL(`${location.protocol}//${location.host}${location.pathname}`);
+        newLink.searchParams.append("im", output);
+        shareLinkInput.value = newLink;
+    });
+}
+
+createModal = function(html) {
+    const modEl = document.createElement('div');
+    modEl.classList.add('modal');
+
+    modEl.appendChild(html);
+
+    const btnsWrEl = document.createElement('div');
+
+    const btnCloseEl = document.createElement('button');
+    btnCloseEl.textContent = 'Close';
+    btnCloseEl.addEventListener('click', closeModal);
+    btnsWrEl.appendChild(btnCloseEl);
+
+    const btnImportEl = document.createElement('button');
+    btnImportEl.textContent = 'Import';
+    btnImportEl.addEventListener('click', () => {
+        importAbc.forEach(el => {
+            el.author = 'user';
+            useUserSym(el);
+        });
+        closeModal();
+    });
+    btnsWrEl.appendChild(btnImportEl);
+
+    modEl.appendChild(btnsWrEl);
+
+    const modWrEl = document.createElement('div');
+    modWrEl.classList.add('modal-wrapper');
+
+    modWrEl.appendChild(modEl);
+    document.body.classList.add('modal-lock');
+    document.body.appendChild(modWrEl);
+
+    document.addEventListener('click', function(event) {
+        if (!document.body.classList.contains('modal-lock')) { return }
+
+        const flyoutElement = document.querySelector('.modal');
+        let targetElement = event.target;
+
+        if (targetElement.classList.contains('modal-sym-remove')) { return }
+
+        do {
+            if (targetElement == flyoutElement) { return }
+            targetElement = targetElement.parentNode;
+        } while (targetElement);
+
+        closeModal();
+    });
+}
+closeModal = function() {
+    document.body.classList.remove('modal-lock');
+    document.querySelector('.modal-wrapper').remove();
+    importAbc = [];
+}
+
+copyShareLink = function() {
+    shareLinkInput.select();
+    shareLinkInput.setSelectionRange(0, 99999);
+    document.execCommand("copy");
 }

@@ -1,13 +1,14 @@
 :root {
     --gap: 8px;
     --rs: 10vh;
-    --cell-bg: #28292b;  /* # #151412 */
+    --cell-bg: #28292b;
     --bg: #eed974;
     --article-bg: #f4f4f4;
     --text: #28292b;
     --link: blue;
     --link-h: #ef303b;
     --gray: hsl(51, 3%, 55%);
+    --input-bd: rgba(127,127,127,.2);
 }
 
 * {

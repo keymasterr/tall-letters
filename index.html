@@ -10,6 +10,7 @@
     <script src="abc.js" defer></script>
     <script src="main.js" defer></script>
     <link rel="stylesheet" href="demo.css">
+    <script src="./json-url/json-url.js"></script>
     <script src="demo.js"></script>
     <link href="likely.css" rel="stylesheet">
 </head>
@@ -177,6 +178,13 @@
                         <input type="submit" class="demo-add_sym-submit" value="Add">
                         <div class="demo-add_sym-error"></div>
                     </form>
+                </div>
+
+                <div class="share-link">
+                    <button onclick="compressUserAbc()">Export custom glyphs</button>
+                    <br>
+                    <input type="text" name="" class="share-link-input" readonly>
+                    <input type="button" value="Copy link" onclick="copyShareLink()">
                 </div>
 
                 <div class="demo-text">
