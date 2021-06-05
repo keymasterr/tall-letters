@@ -180,13 +180,6 @@
                     </form>
                 </div>
 
-                <div class="share-link">
-                    <button onclick="compressUserAbc()">Export custom glyphs</button>
-                    <br>
-                    <input type="text" name="" class="share-link-input" readonly>
-                    <input type="button" value="Copy link" onclick="copyShareLink()">
-                </div>
-
                 <div class="demo-text">
                     <p align="center">
                         This is how letter <em>s</em> glyph is built:
@@ -202,12 +195,22 @@
                     <div class="demo-syms-title">
                         <h4>Custom glyphs</h4>
                         <div>
-                            <input type="checkbox" name="prefer-user" id="prefer-user" onclick="preferUser = !preferUser"> <label for="prefer-user">prefer</label>
+                            <input type="checkbox" name="prefer-user" id="prefer-user" onclick="preferUserCheckbox()"> <label for="prefer-user">prefer</label>
                         </div>
                         <div>
                             <input type="checkbox" name="highlight-user" id="highlight-user" onclick="highlightUserToggle()"> <label for="highlight-user">highlight</label>
                         </div>
+
+                        <input type="button" class="export-btn" value="export" onclick="compressUserAbc()">
+
+                        <input type="button" value="sort" onclick="sortUserAbc()">
                     </div>
+
+                    <div class="share-link">
+                        <input type="text" name="" class="share-link-input" readonly>
+                        <input type="button" value="Copy link" class="share-link-btn" onclick="copyShareLink()">
+                    </div>
+
                     <ul class="demo-syms">
                         <span class="demo-syms-placeholder">Create them yourself</span>
                     </ul>

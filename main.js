@@ -7,11 +7,12 @@ const modelRegex = /^\[(\'[<>()]*0?[1-6][<>()]*(,[<>()]*0?[1-6][<>()]*)*\')(,\'[
 
 inp.value = 'tall letters';
 inp.addEventListener('input', function() {
-    render(this.value);
+    render();
 });
 
 render = function(text) {
     let rendered = [];
+    if (!text) { text = inp.value }
     const symsArr = text.toLowerCase().split('');
 
     let cursor = document.createElement('div');
@@ -130,6 +131,11 @@ noSymbol = function(sym) {
     console.debug('No model for "' + sym + '"');
 }
 
+preferUserCheckbox = function() {
+    preferUser = !preferUser;
+    render();
+}
+
 let vh = 0;
 windowSizes = function() {
     const height = window.innerHeight|| document.documentElement.clientHeight||
@@ -201,7 +207,7 @@ disp.addEventListener('click', () => {
     inp.value = tmpStr;
 });
 
-render(inp.value);
+render();
 windowSizes();
 
 highlightUserToggle = function() {

@@ -11,6 +11,7 @@ document.addEventListener('DOMContentLoaded', function(event) {
     parseDemo();
     readUrl();
 
+    document.querySelector('#prefer-user').checked = preferUser;
     shareLinkInput = document.querySelector('.share-link-input');
 });
 
@@ -22,14 +23,12 @@ readUrl = function() {
 
     if (text) {
         inp.value = unescape(text);
-        render(inp.value);
+        render();
     }
 
     if (importAbc) {
         decompressUserAbc(importAbc);
     }
-
-    window.history.replaceState({}, document.title, window.location.pathname);
 }
 
 removeImportSym = function(click) {
@@ -575,6 +574,24 @@ parseModelToDemo = function(model) {
     })
 }
 
+sortUserAbc = function() {
+    var list = document.querySelector('.demo-syms');
+
+    [...list.children]
+        .sort((a,b) => {
+            if (a.classList.contains('demo-syms-placeholder') || b.classList.contains('demo-syms-placeholder')) { return -1 };
+            const aa = a.querySelector('.sym').dataset.sym;
+            const bb = b.querySelector('.sym').dataset.sym;
+            return aa.localeCompare(bb)
+        })
+        .forEach(node => list.appendChild(node));
+
+    userAbc.sort((a,b) => {
+        return a.sym.localeCompare(b.sym);
+    });
+    saveUserAbc();
+}
+
 decompressUserAbc = function(str) {
     lib.decompress(str).then(output => {
         importAbc = [...output];
@@ -587,6 +604,7 @@ decompressUserAbc = function(str) {
 }
 
 compressUserAbc = function() {
+    const shareLinkWrEl = document.querySelector('.share-link');
     arr = [...userAbc];
     arr.forEach(el => {
         if (el.hasOwnProperty('author')) {
@@ -597,6 +615,12 @@ compressUserAbc = function() {
         const newLink = new URL(`${location.protocol}//${location.host}${location.pathname}`);
         newLink.searchParams.append("im", output);
         shareLinkInput.value = newLink;
+        shareLinkInput.addEventListener('click', function() {
+            this.select();
+            this.setSelectionRange(0, 99999);
+        });
+
+        shareLinkWrEl.style.display = 'block';
     });
 }
 
@@ -607,6 +631,7 @@ createModal = function(html) {
     modEl.appendChild(html);
 
     const btnsWrEl = document.createElement('div');
+    btnsWrEl.classList.add('modal-footer');
 
     const btnCloseEl = document.createElement('button');
     btnCloseEl.textContent = 'Close';
@@ -653,6 +678,7 @@ closeModal = function() {
     document.body.classList.remove('modal-lock');
     document.querySelector('.modal-wrapper').remove();
     importAbc = [];
+    window.history.replaceState({}, document.title, window.location.pathname);
 }
 
 copyShareLink = function() {

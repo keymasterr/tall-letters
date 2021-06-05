@@ -8,11 +8,15 @@
     --link: blue;
     --link-h: #ef303b;
     --gray: hsl(51, 3%, 55%);
-    --input-bd: rgba(127,127,127,.2);
+    --input-bd: rgba(127,127,127,.21);
 }
 
 * {
     box-sizing: border-box;
+}
+
+html {
+    font-size: 20px;
 }
 
 body {
@@ -23,7 +27,7 @@ body {
     padding: 0;
     background: var(--bg);
     color: var(--text);
-    font-size: 20px;
+    font-size: 1em;
     font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
     line-height: 1.3;
     margin: 0 var(--gap) var(--gap);
@@ -44,6 +48,32 @@ a:hover {
 }
 
 h4 { margin: 0; }
+
+button
+, input[type="button"]
+, input[type="submit"]
+{
+    font-size: 1rem;
+    border: 1px solid var(--input-bd);
+    color: var(--text);
+    background: rgba(127,127,127,.035);
+    border-radius: 4px;
+    line-height: 1;
+    padding: 0.13em 0.27em 0.17em 0.23em;
+    background-clip: padding-box;
+}
+button:hover
+, input[type="button"]:hover
+, input[type="submit"]:hover
+{
+    background: rgba(127,127,127,.1);
+}
+button:active
+, input[type="button"]:active
+, input[type="submit"]:active
+{
+    background: rgba(127,127,127,.35);
+}
 
 main {
     position: relative;
@@ -115,7 +145,6 @@ article {
     /* flex-grow: 1; */
     flex-basis: 0;
     margin: calc(var(--gap) / 2);
-    border-radius: 1px;
 }
 .sol { background: var(--cell-bg); }
 .sol::before, .sol::after { border-color: var(--cell-bg) !important; }

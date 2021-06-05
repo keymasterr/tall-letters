@@ -40,21 +40,18 @@
     text-align: center;
     margin-bottom: 3em;
 }
-.demo-add_sym input {
+.demo-add_sym input[type="text"] {
     font-size: 20px;
     padding: calc(var(--gap) / 2);
     outline: none;
     border: 1px solid var(--input-bd);
+    background-clip: padding-box;
 }
 .demo-add_sym-sym {
     width: 1.5em;
     text-align: center;
 }
-.demo-add_sym-sym:valid ~ .demo-add_sym-submit {
-    color: unset;
-    cursor: pointer;
-}
-.demo-add_sym-submit {
+.demo-add_sym-sym:not(:valid) ~ .demo-add_sym-submit {
     color: var(--input-bd);
 }
 .demo-add_sym-error {
@@ -68,7 +65,43 @@
 .demo-syms-title {
     display: flex;
     align-items: baseline;
-    gap: 1em;
+    margin-right: -1rem;
+    flex-wrap: wrap;
+}
+.demo-syms-title h4 {
+    flex-basis: 100%;
+}
+.demo-syms-title > * { margin-right: 1rem; }
+
+.share-link {
+    display: none;
+    position: relative;
+    width: 40%;
+    min-width: 280px;
+    margin: .5em 0 .5em auto;
+    background: rgba(127,127,127,.1);
+    padding: .5em;
+    line-height: 1;
+    border-radius: 2px;
+    white-space: nowrap;
+}
+.share-link-input {
+    background: none;
+    border: none;
+    outline: none;
+    padding: 0.5em;
+    margin: -0.5em 0;
+    width: 100%;
+    padding-right: 100px;
+    margin-right: -80px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+}
+.share-link-btn {
+    position: absolute;
+    right: .35em;
+    margin-top: -.2em;
 }
 
 .demo-syms-placeholder {
@@ -366,6 +399,12 @@ body.modal-lock {
     outline: none;
     user-select: auto;
 }
+.modal-footer {
+    padding: 1em;
+}
+.modal-footer button {
+    margin: 0 0.5em;
+}
 body.modal-lock main
 , body.modal-lock article
 , body.modal-lock footer
@@ -375,4 +414,5 @@ body.modal-lock main
 @media screen and (max-width: 920px) {
     .demo-container { display: block; }
     .demo-syms-placeholder::before { content: '↑ '; }
+    .modal { padding: 1em 1em 3em 2em; }
 }
