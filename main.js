@@ -13,7 +13,7 @@ inp.addEventListener('input', function() {
 render = function(text) {
     let rendered = [];
     if (!text) { text = inp.value }
-    const symsArr = text.toLowerCase().split('');
+    let symsArr = text.toLowerCase().split('');
 
     let cursor = document.createElement('div');
     cursor.classList.add('cursor');
@@ -119,6 +119,7 @@ render = function(text) {
             rendered.push(symEl);
         } else {
             noSymbol(sym);
+            return
         }
     });
     disp.innerHTML = '';
@@ -129,7 +130,23 @@ render = function(text) {
 
 noSymbol = function(sym) {
     console.debug('No model for "' + sym + '"');
+    const text = inp.value.replace(new RegExp(sym, 'g'), '');
+    inp.value = text;
+
+    const posx = parseFloat(inp.offsetLeft) + (parseFloat(inp.offsetWidth) + 10);
+    const posy = parseFloat(inp.offsetTop); // + (parseFloat(inp.offsetHeight) / 2)
+
+    const nonexSymsEl = document.createElement('div');
+    nonexSymsEl.textContent = sym;
+    nonexSymsEl.classList.add('nonex-syms');
+    nonexSymsEl.style.left = `${posx}px`;
+    nonexSymsEl.style.top = `${posy}px`;
+    document.body.appendChild(nonexSymsEl);
+    setTimeout(() => {
+        nonexSymsEl.remove()
+    }, 400);
 }
+
 
 preferUserCheckbox = function() {
     preferUser = !preferUser;
@@ -213,4 +230,39 @@ windowSizes();
 highlightUserToggle = function() {
     highlightUser = !highlightUser;
     disp.classList.toggle('highlight-user');
+}
+
+scrsh = function() {
+    const el = document.querySelector(".display-wrapper");
+    html2canvas(
+        el,
+        {   imageTimeout: 0
+        ,   backgroundColor: null
+        ,   logging: false
+        ,   onclone: function() {
+                const iframe = document.querySelector('.html2canvas-container');
+                const cloneEl = iframe.contentWindow.document.querySelector(".display-wrapper");
+                cloneEl.style.setProperty('position', 'relative');
+            }
+        }
+    ).then(canvas => {
+        // const image = new Image();
+        // image.id = "pic";
+        // image.src = canvas.toDataURL();
+        // image.style.maxWidth = '100%';
+        // createModal(image, false);
+
+
+        const link = document.createElement('a');
+        let filename = `tall_letters-${inp.value}-${Date.now()}`;
+        let text = canvas.toDataURL();
+        link.setAttribute('href', text);
+        link.setAttribute('download', filename);
+        link.setAttribute('target', '_blank');
+
+        link.style.display = 'none';
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+    });
 }

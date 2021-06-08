@@ -1,10 +1,23 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-2400887-3"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-2400887-3');
+    </script>
+
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tall Letters</title>
+
+    <meta property="og:image" content="OG.png" />
+    <meta property="og:description" content="Type and stretch... or design and share you own letters!" />
 
     <link rel="stylesheet" href="style.css">
     <script src="abc.js" defer></script>
@@ -13,6 +26,7 @@
     <script src="./json-url/json-url.js"></script>
     <script src="demo.js"></script>
     <link href="likely.css" rel="stylesheet">
+    <script src="html2canvas.min.js"></script>
 </head>
 <body>
     <main>
@@ -24,6 +38,7 @@
     <article>
         <form onsubmit="inp.blur(); event.preventDefault();" class="main-input">
             <input class="text-input" type="text" value="tall letters" title="Was going to hide this box, but meh. It's ok to have one">
+            <!-- <input onclick="scrsh()" class="scrsh-btn" type="button" value="Save as image"> -->
         </form>
 
         <div class="demo-container">
@@ -173,7 +188,7 @@
                 <div class="demo-add_sym">
                     <form onsubmit="addUserSym()" class="demo-add_sym-form">
                         Symbol
-                        <input type="text" class="demo-add_sym-sym" maxlength="1" required>
+                        <input type="text" class="demo-add_sym-sym" value="s" maxlength="1" required>
                         <input type="hidden" class="demo-add_sym-model" required>
                         <input type="submit" class="demo-add_sym-submit" value="Add">
                         <div class="demo-add_sym-error"></div>
@@ -230,11 +245,23 @@
                     <div class="twitter" data-via="keymasterr">Tweet</div>
                     <div class="reddit">Share</div>
                     <div class="telegram">Send</div>
-                    <div class="pinterest">Pin</div>
+                    <div class="pinterest" data-media="https://keymasterr.com/micro/tall-letters/OG.png">Pin</div>
                 </div>
+
+                <p>Made in <a class="linking-park" href="https://intuition.team/park/tall-letters">Intuition Park</a></p>
             </div>
             <div class="footer-text">
-                <small>I will be happy to add new symbols to the actual list if you'll come up with some nice results. Drop me a letter.</small>
+                <small>
+                    <p>
+                        Tall Letters are free for commercial use. The source code is available on <a href="https://github.com/keymasterr/tall-letters" target="_blank"">Github</a>.
+                    </p>
+
+                    <p>
+                        If you like this page or find it useful,
+                        <span style="margin-right: 0.2em;"></span><a href="http://buymeacoffee.com/keymasterr" target="_blank" class="buy-coffee-link" style="margin-left: -0.2em;">🍺 Buy me a coffee</a>
+                        or drop me a letter.
+                    </p>
+                </small>
             </div>
         </div>
     </article>

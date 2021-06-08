@@ -1,9 +1,10 @@
 :root {
     --gap: 8px;
+    --letterlink: var(--gap);
     --rs: 10vh;
     --cell-bg: #28292b;
     --bg: #eed974;
-    --article-bg: #f4f4f4;
+    --article-bg: #f7f7f7;
     --text: #28292b;
     --link: blue;
     --link-h: #ef303b;
@@ -94,6 +95,30 @@ article {
     text-align: center;
     margin-bottom: 3em;
 }
+.nonex-syms {
+    position: absolute;
+    color: var(--link-h);
+    opacity: 0.5;
+
+    animation-name: nonex-sym;
+    animation-duration: .3s;
+    animation-timing-function: ease-out;
+    animation-iteration-count: 1;
+    animation-fill-mode: forwards;
+}
+@keyframes nonex-sym {
+    0% {}
+    33% {
+        transform: translate(-2px, -7px);
+    }
+    67% {
+        transform: translate(2px, -14px);
+    }
+    100% {
+        transform: translate(0, -21px);
+        opacity: 0;
+    }
+}
 
 .text-input {
     font-size: 20px;
@@ -110,10 +135,12 @@ article {
 .display-wrapper {
     display: flex;
     position: absolute;
-    width: 100%;
+    width: calc(100% + (2 * var(--gap)));
+    height: calc(100% - var(--scroll-mod));
+    margin: 0 calc(-1 * var(--gap));
+    padding: 0 var(--gap);
     bottom: 0;
     --scroll-mod: 0px;
-    height: calc(100% - var(--scroll-mod));
 }
 
 .display {
@@ -147,7 +174,6 @@ article {
     margin: calc(var(--gap) / 2);
 }
 .sol { background: var(--cell-bg); }
-.sol::before, .sol::after { border-color: var(--cell-bg) !important; }
 
 .s1 { flex-basis: calc(((100% - (5 * var(--gap))) / 6 * 1) + (0 * var(--gap))); }
 .s2 { flex-basis: calc(((100% - (5 * var(--gap))) / 6 * 2) + (1 * var(--gap))); }
@@ -169,26 +195,26 @@ article {
     content: '';
     position: absolute;
     display: block;
-    width: var(--gap);
+    width: calc(var(--gap) + 2px);
     height: 100%;
     top: 0;
     box-sizing: border-box;
     border-style: solid;
     border-width: 0;
-    border-color: transparent;
+    border-color: var(--cell-bg);
 }
 .d-tl::before,
 .d-tr::after
-{ border-top-width: var(--gap); }
+{ border-top-width: var(--letterlink); }
 .d-bl::before,
 .d-br::after
-{ border-bottom-width: var(--gap); }
+{ border-bottom-width: var(--letterlink); }
 .d-tl::before,
 .d-bl::before
-{ left: calc(-1 * var(--gap)); }
+{ left: calc(-1 * var(--gap) - 1px); }
 .d-tr::after,
 .d-br::after
-{ right: calc(-1 * var(--gap)); }
+{ right: calc(-1 * var(--gap) - 1px); }
 
 .cursor {
     position: absolute;

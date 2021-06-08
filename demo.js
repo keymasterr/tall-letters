@@ -575,9 +575,9 @@ parseModelToDemo = function(model) {
 }
 
 sortUserAbc = function() {
-    var list = document.querySelector('.demo-syms');
+    var list = document.querySelector('.user_syms .demo-syms');
 
-    [...list.children]
+    [...list.querySelectorAll('li')]
         .sort((a,b) => {
             if (a.classList.contains('demo-syms-placeholder') || b.classList.contains('demo-syms-placeholder')) { return -1 };
             const aa = a.querySelector('.sym').dataset.sym;
@@ -585,6 +585,8 @@ sortUserAbc = function() {
             return aa.localeCompare(bb)
         })
         .forEach(node => list.appendChild(node));
+
+
 
     userAbc.sort((a,b) => {
         return a.sym.localeCompare(b.sym);
@@ -624,7 +626,7 @@ compressUserAbc = function() {
     });
 }
 
-createModal = function(html) {
+createModal = function(html, isImport) {
     const modEl = document.createElement('div');
     modEl.classList.add('modal');
 
@@ -638,16 +640,18 @@ createModal = function(html) {
     btnCloseEl.addEventListener('click', closeModal);
     btnsWrEl.appendChild(btnCloseEl);
 
-    const btnImportEl = document.createElement('button');
-    btnImportEl.textContent = 'Import';
-    btnImportEl.addEventListener('click', () => {
-        importAbc.forEach(el => {
-            el.author = 'user';
-            useUserSym(el);
+    if (isImport !== false) {
+        const btnImportEl = document.createElement('button');
+        btnImportEl.textContent = 'Import';
+        btnImportEl.addEventListener('click', () => {
+            importAbc.forEach(el => {
+                el.author = 'user';
+                useUserSym(el);
+            });
+            closeModal();
         });
-        closeModal();
-    });
-    btnsWrEl.appendChild(btnImportEl);
+        btnsWrEl.appendChild(btnImportEl);
+    }
 
     modEl.appendChild(btnsWrEl);
 
@@ -675,6 +679,7 @@ createModal = function(html) {
     });
 }
 closeModal = function() {
+    render();
     document.body.classList.remove('modal-lock');
     document.querySelector('.modal-wrapper').remove();
     importAbc = [];
