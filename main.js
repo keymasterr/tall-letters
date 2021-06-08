@@ -129,7 +129,7 @@ render = function(text) {
 }
 
 noSymbol = function(sym) {
-    console.debug('No model for "' + sym + '"');
+    // console.debug('No model for "' + sym + '"');
     const text = inp.value.replace(new RegExp(sym, 'g'), '');
     inp.value = text;
 

@@ -142,11 +142,12 @@ addUserSym = function() {
 removeUserSym = function(click) {
     const li = click.target.parentElement;
     const ndx = parseInt(Array.from(li.parentNode.children).indexOf(li) - 1);
+    const sym = userAbc[ndx].sym;
     userAbc.splice(ndx, 1);
     saveUserAbc();
     abc_u = abc.concat(userAbc);
     li.remove();
-    stopPropagation();
+    if (inp.value.includes(sym)) { render(); }
 }
 useUserSym = function(obj) {
     abc_u.push(obj);
