@@ -141,6 +141,10 @@ noSymbol = function(sym) {
     nonexSymsEl.classList.add('nonex-syms');
     nonexSymsEl.style.left = `${posx}px`;
     nonexSymsEl.style.top = `${posy}px`;
+
+    const trembleSize = ~~(Math.random() * 7 - 3);
+    nonexSymsEl.style.setProperty('--nonex-tremble', `${trembleSize}px`);
+
     document.body.appendChild(nonexSymsEl);
     setTimeout(() => {
         nonexSymsEl.remove()

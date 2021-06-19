@@ -89,6 +89,8 @@ article {
     background: var(--article-bg);
     min-height: 100vh;
     border-radius: 2px;
+
+    --nonex-tremble: 3px
 }
 
 .main-input {
@@ -109,10 +111,10 @@ article {
 @keyframes nonex-sym {
     0% {}
     33% {
-        transform: translate(-2px, -7px);
+        transform: translate(calc(-1 * var(--nonex-tremble)), -7px);
     }
     67% {
-        transform: translate(2px, -14px);
+        transform: translate(var(--nonex-tremble), -14px);
     }
     100% {
         transform: translate(0, -21px);
@@ -141,6 +143,7 @@ article {
     padding: 0 var(--gap);
     bottom: 0;
     --scroll-mod: 0px;
+    will-change: height;
 }
 
 .display {
@@ -151,7 +154,6 @@ article {
     flex-wrap: nowrap;
     margin: calc(var(--gap) / 2) calc(var(--gap) * -.5);
     cursor: text;
-    will-change: height;
 }
 .display.highlight-user .sym:not([data-author="user"]) {
     opacity: 0.75;
