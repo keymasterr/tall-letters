@@ -1,10 +1,10 @@
 ## Todo
-- [ ] more usable interactive model?
+- [ ] click-and-drag interactive model?
 - [X] build model string with interactive model
 - [X] build interactive model with model string
 - [X] “prefer user glyphs” checkbox
 - [X] “highlight user glyphs” checkbox
-- [ ] controls for border radius, link dashes and gap width
+- [X] controls for colors and gap width
 - [X] table with user's glyphs
 - [X] table with initial glyphs
 - [X] glyph preview next to the added model (click to load to glyph designer)
