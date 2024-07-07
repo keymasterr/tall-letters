@@ -21,7 +21,7 @@
     max-width: 100%;
     background: var(--bg);
     padding: var(--rs);
-    margin: 0 auto 1em;
+    margin: .5em 0;
     border-radius: var(--rs);
     line-height: 1;
     user-select: none;
@@ -38,12 +38,11 @@
 .hl-gr { color: var(--gray);}
 
 .demo-add_sym {
-    text-align: center;
     margin-bottom: 3em;
 }
 .demo-add_sym input[type="text"] {
     font-size: 20px;
-    padding: calc(var(--gap) / 2);
+    padding: .25em;
     outline: none;
     border: 1px solid var(--input-bd);
     background-clip: padding-box;

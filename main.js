@@ -236,12 +236,69 @@ highlightUserToggle = function() {
     disp.classList.toggle('highlight-user');
 }
 
+document.querySelector('#gap-size').addEventListener('input', (event) => {
+    document.documentElement.style.setProperty('--gap', `${event.target.value}px`);
+});
+const pickrBg = Pickr.create({
+    el: '.pickr-bg',
+    theme: 'nano',
+    comparison: false,
+    lockOpacity: true,
+    components: {
+        preview: false,
+        opacity: false,
+        hue: true,
+        interaction: {
+            hex: false,
+            rgba: false,
+            hsla: false,
+            hsva: false,
+            cmyk: false,
+            input: true,
+            clear: false,
+            save: false,
+        },
+    },
+    default: '#ffdb70',
+});
+pickrBg.on('change', (color, source, instance) => {
+    document.documentElement.style.setProperty('--bg', `#${color.toHEXA().join('')}`);
+});
+const pickrCellBg = Pickr.create({
+    el: '.pickr-cell',
+    theme: 'nano',
+    comparison: false,
+    lockOpacity: true,
+    components: {
+        preview: false,
+        opacity: false,
+        hue: true,
+        interaction: {
+            hex: false,
+            rgba: false,
+            hsla: false,
+            hsva: false,
+            cmyk: false,
+            input: true,
+            clear: false,
+            save: false,
+        },
+    },
+    default: '#28292b',
+});
+pickrCellBg.on('change', (color, source, instance) => {
+    document.documentElement.style.setProperty('--cell-bg', `#${color.toHEXA().join('')}`);
+});
+
 scrsh = function() {
     const el = document.querySelector(".display-wrapper");
+    const isBackground = document.querySelector("#is-background").checked;
+    const bgColor = isBackground ? document.defaultView.getComputedStyle(document.body).backgroundColor : null;
+    !bgColor && el.style.setProperty('--cell-bg', '#000');
     html2canvas(
         el,
         {   imageTimeout: 0
-        ,   backgroundColor: null
+        ,   backgroundColor: bgColor
         ,   logging: false
         ,   onclone: function() {
                 const iframe = document.querySelector('.html2canvas-container');
@@ -268,5 +325,6 @@ scrsh = function() {
         document.body.appendChild(link);
         link.click();
         document.body.removeChild(link);
+        el.style.removeProperty('--cell-bg');
     });
 }

@@ -31,6 +31,8 @@
     <script src="main.js" defer></script>
     <link rel="stylesheet" href="demo.css">
     <script src="./json-url/json-url.js"></script>
+    <link rel="stylesheet" href="pickr-nano.min.css">
+    <script src="pickr.min.js"></script>
     <script src="demo.js"></script>
     <link href="likely.css" rel="stylesheet">
     <script src="html2canvas.min.js"></script>
@@ -43,13 +45,36 @@
         </div>
     </main>
     <article>
-        <form onsubmit="inp.blur(); event.preventDefault();" class="main-input">
-            <input class="text-input" type="text" value="tall letters" title="Was going to hide this box, but meh. It's ok to have one">
-            <!-- <input onclick="scrsh()" class="scrsh-btn" type="button" value="Save as image"> -->
+        <form class="main-input" onsubmit="inp.blur(); event.preventDefault();">
+            <div class="fx-col">
+                Text to display <input class="text-input" type="text" value="tall letters" title="Was going to hide this box, but meh. It's ok to have one">
+            </div>
+            <div class="fx-col screenshot-block">
+                <label>
+                    <input checked type="checkbox" name="is-background" id="is-background"> background
+                </label>
+                <input type="button" value="Save image" onclick="scrsh();">
+            </div>
         </form>
+        <div class="secondary-input">
+            <div class="fx-col">
+                <input type="range" name="gap-size" id="gap-size" value="10" min="-10" max="50" list="gap-size-values">
+                <datalist id="gap-size-values">
+                    <option value="-10"></option>
+                    <option value="0"></option>
+                    <option value="10"></option>
+                    <option value="50"></option>
+                </datalist>
+            </div>
+            <div class="fx-col">
+                <div class="pickr-bg"></div>
+                <div class="pickr-cell"></div>
+            </div>
+        </div>
 
         <div class="demo-container">
             <div class="demo-aside">
+                <h4>Glyph constructor</h4>
                 <div class="demo">
                     <div class="add-col-btn">+</div>
                     <div class="demo-col">
@@ -274,10 +299,10 @@
     </article>
 
     <footer>
-        <div class="footer-left">
+        <div class="fx-col">
             <p><a href="https://keymasterr.com">← keymasterr.com</a></p>
         </div>
-        <div class="footer-right">
+        <div class="fx-col">
             <p>
                 <a href="mailto:kmstrr@gmail.com" class="footer-mailto">kmstrr<span class="mailsnail-20">@</span>gmail.com</a>
                 <br>

@@ -3,7 +3,7 @@
     --letterlink: var(--gap);
     --rs: 10vh;
     --cell-bg: #28292b;
-    --bg: #eed974;
+    --bg: #ffdb70;
     --article-bg: #f7f7f7;
     --text: #28292b;
     --link: blue;
@@ -24,6 +24,7 @@ body {
     display: flex;
     flex-direction: column;
     min-height: 100vh;
+    align-items: center;
     margin: 0;
     padding: 0;
     background: var(--bg);
@@ -31,7 +32,6 @@ body {
     font-size: 1em;
     font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
     line-height: 1.3;
-    margin: 0 var(--gap) var(--gap);
 }
 p {
     margin: 0;
@@ -79,13 +79,14 @@ button:active
 main {
     position: relative;
     height: 90vh;
+    margin: 0 calc(var(--gap) * -1);
+    width: 100%;
 }
 
 article {
-    width: 100%;
-    max-width: calc(1024px - (2 * var(--gap)));
-    margin: 0 auto;
-    padding: var(--gap) calc(3 * var(--gap)) calc(3 * var(--gap));
+    max-width: 1024px;
+    margin: 0 max(0px, var(--gap));
+    padding: .5em 1.5em 1em;
     background: var(--article-bg);
     min-height: 100vh;
     border-radius: 2px;
@@ -94,9 +95,53 @@ article {
 }
 
 .main-input {
-    text-align: center;
-    margin-bottom: 3em;
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 2em;
+    margin-bottom: .5em;
 }
+.secondary-input {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 3em;
+    gap: 2em;
+}
+.fx-col {
+    align-items: baseline;
+    display: flex;
+    flex-wrap: wrap;
+    gap: .5em;
+}
+.fx-col:first-of-type {
+    flex-grow: 1;
+}
+.fx-col.screenshot-block {
+    justify-content: end;
+    white-space: nowrap;
+}
+.fx-col input {
+    display: inline;
+}
+.fx-col .pickr {
+    top: calc(-.25em - 2px);
+}
+.fx-col .pickr .pcr-button {
+    height: 1.5em;
+}
+.pcr-color-chooser { grid-area: 2/1/2/3 !important; }
+.pcr-swatches { display: none !important; }
+.pcr-palette {
+    border-bottom-right-radius: 0 !important;
+    border-bottom-left-radius: 0 !important;
+}
+
+
+#gap-size {
+    width: clamp(200px, 100%, 300px);
+}
+
 .nonex-syms {
     position: absolute;
     color: var(--link-h);
@@ -123,27 +168,26 @@ article {
 }
 
 .text-input {
-    font-size: 20px;
+    font-size: 1em;
     display: block;
-    margin: 0 auto var(--gap);
-    padding: calc(var(--gap) / 2);
+    margin-bottom: .5em;
+    padding: .25em;
     outline: none;
     border: 1px solid var(--input-bd);
-    /* position: absolute !important;
-    top: -9999px !important;
-    left: -9999px !important; */
+    width: clamp(200px, 100%, 300px);
 }
 
 .display-wrapper {
     display: flex;
-    position: absolute;
-    width: calc(100% + (2 * var(--gap)));
-    height: calc(100% - var(--scroll-mod));
-    margin: 0 calc(-1 * var(--gap));
-    padding: 0 var(--gap);
-    bottom: 0;
+    position: fixed;
+    top: 0;
+    height: calc(90vh - var(--scroll-mod));
+    width: 100%;;
+    margin: 0;
+    padding: var(--gap);
     --scroll-mod: 0px;
     will-change: height;
+    z-index: -1;
 }
 
 .display {
@@ -152,7 +196,7 @@ article {
     flex-grow: 1;
     flex-direction: row;
     flex-wrap: nowrap;
-    margin: calc(var(--gap) / 2) calc(var(--gap) * -.5);
+    margin: calc(var(--gap) * -.5);
     cursor: text;
 }
 .display.highlight-user .sym:not([data-author="user"]) {
@@ -242,16 +286,12 @@ article {
 footer {
     display: flex;
     width: 100%;
-    max-width: calc(1024px - (2 * var(--gap)));
-    margin: var(--gap) auto;
+    max-width: calc(1024px + 2 * var(--gap));
+    padding: .5em max(0px, var(--gap));
+    margin: 0;
+    gap: 2em;
 }
-.footer-left {
-    flex-grow: 1;
-    margin-right: var(--gap);
-}
-.footer-right {
-    flex-grow: 2;
-    margin-left: var(--gap);
+footer > .fx-col:last-of-type {
     text-align: right;
 }
 .footer-mailto {
