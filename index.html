@@ -46,7 +46,7 @@
     </main>
     <article>
         <form class="main-input" onsubmit="inp.blur(); event.preventDefault();">
-            <div class="fx-col">
+            <div class="fx-col input-block">
                 Text to display <input class="text-input" type="text" value="tall letters" title="Was going to hide this box, but meh. It's ok to have one">
             </div>
             <div class="fx-col screenshot-block">
@@ -67,6 +67,9 @@
                 </datalist>
             </div>
             <div class="fx-col">
+                <input type="range" name="radius-size" id="radius-size" value="10" min="0" max="10" step="0.1">
+            </div>
+            <div class="fx-col" style="flex-wrap: nowrap;">
                 <div class="pickr-bg"></div>
                 <div class="pickr-cell"></div>
             </div>

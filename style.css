@@ -114,7 +114,7 @@ article {
     flex-wrap: wrap;
     gap: .5em;
 }
-.fx-col:first-of-type {
+.fx-col.input-block {
     flex-grow: 1;
 }
 .fx-col.screenshot-block {
@@ -139,7 +139,12 @@ article {
 
 
 #gap-size {
-    width: clamp(200px, 100%, 300px);
+    width: 20vw;
+    min-width: 200px;
+    max-width: 300px;
+}
+#radius-size {
+    width: 80px;
 }
 
 .nonex-syms {
@@ -290,6 +295,7 @@ footer {
     padding: .5em max(0px, var(--gap));
     margin: 0;
     gap: 2em;
+    justify-content: space-between;
 }
 footer > .fx-col:last-of-type {
     text-align: right;

@@ -239,6 +239,9 @@ highlightUserToggle = function() {
 document.querySelector('#gap-size').addEventListener('input', (event) => {
     document.documentElement.style.setProperty('--gap', `${event.target.value}px`);
 });
+document.querySelector('#radius-size').addEventListener('input', (event) => {
+    document.documentElement.style.setProperty('--rs', `${event.target.value}vh`);
+});
 const pickrBg = Pickr.create({
     el: '.pickr-bg',
     theme: 'nano',
